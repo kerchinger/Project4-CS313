@@ -19,7 +19,7 @@ import org.robolectric.annotation.Config;
 @Config(manifest = "src/main/AndroidManifest.xml", emulateSdk=18)
 public class StopwatchActivityRobolectric extends AbstractStopwatchActivityTest {
 
-    private static String TAG = "stopwatch-android-activity-robolectric";
+    private static String TAG = "stopwatch-android-act1vity-robolectric";
 
     private StopwatchAdapter activity;
 

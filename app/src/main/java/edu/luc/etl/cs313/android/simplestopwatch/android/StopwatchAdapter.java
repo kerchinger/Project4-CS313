@@ -18,7 +18,7 @@ import edu.luc.etl.cs313.android.simplestopwatch.model.StopwatchModelFacade;
  */
 public class StopwatchAdapter extends Activity implements StopwatchUIUpdateListener {
 
-    private static String TAG = "stopwatch-android-activity";
+    private static String TAG = "stopwatch-android-act1vity";
 
     /**
      * The state-based dynamic model.
