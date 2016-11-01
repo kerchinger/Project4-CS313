@@ -19,7 +19,6 @@ abstract class TimerState implements TimerUIListener, ClockListener{
     public void onButtonPress() {}
     public void onTick() {}
     public void onTimeout() {}
-    public abstract int getId();
-
     public abstract int getID();
 }
+

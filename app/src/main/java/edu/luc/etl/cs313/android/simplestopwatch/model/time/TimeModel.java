@@ -12,4 +12,9 @@ public interface TimeModel {
     int getRuntime();
     void setLaptime();
     int getLaptime();
+
+    void dec(); // TODO Make sure these are implemented in proper class
+    int get();
+    void inc();
+    void reset();
 }

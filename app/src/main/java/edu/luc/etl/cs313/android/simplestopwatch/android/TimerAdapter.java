@@ -21,7 +21,7 @@ import edu.luc.etl.cs313.android.simplestopwatch.model.state.ConcreteTimerModelF
 
 public class TimerAdapter extends Activity implements TimerUIUpdateListener {
 
-    private static String TAG = "simletimer-android-act1vity";
+    private static String TAG = "simpletimer-android-act1vity";
 
     /**
      * The state-based dynamic model.

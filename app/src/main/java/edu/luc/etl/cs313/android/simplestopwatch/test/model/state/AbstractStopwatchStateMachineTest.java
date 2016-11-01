@@ -11,7 +11,7 @@ import org.junit.Test;
 import edu.luc.etl.cs313.android.simplestopwatch.R;
 import edu.luc.etl.cs313.android.simplestopwatch.common.TimerUIUpdateListener;
 import edu.luc.etl.cs313.android.simplestopwatch.model.clock.ClockModel;
-import edu.luc.etl.cs313.android.simplestopwatch.model.clock.OnTickListener;
+import edu.luc.etl.cs313.android.simplestopwatch.model.state.TimerStateMachine;
 import edu.luc.etl.cs313.android.simplestopwatch.model.time.TimeModel;
 
 /**
@@ -171,7 +171,7 @@ class UnifiedMockDependency implements TimeModel, ClockModel, TimerUIUpdateListe
     }
 
     @Override
-    public void setOnTickListener(OnTickListener listener) {
+    public void setOnTickListener(TimerStateMachine listener) {
         throw new UnsupportedOperationException();
     }
 

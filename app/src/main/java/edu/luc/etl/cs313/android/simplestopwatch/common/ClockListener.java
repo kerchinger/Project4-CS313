@@ -7,4 +7,5 @@ package edu.luc.etl.cs313.android.simplestopwatch.common;
 public interface ClockListener {
     void onTick();
     void onTimeout();
+
 }

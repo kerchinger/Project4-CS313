@@ -8,7 +8,9 @@ import edu.luc.etl.cs313.android.simplestopwatch.common.TimerUIUpdateListener;
  * Created by kyleerchinger on 11/1/16.
  */
 
-public class DefaultTimerStateMachine implements TimerStateMachine {
+public abstract class DefaultTimerStateMachine implements TimerStateMachine {
+
+    private TimerState nextState;
 
     public DefaultTimerStateMachine(final TimeModel timeModel, final ClockModel clockModel){
         this.timeModel = timeModel;
@@ -17,22 +19,23 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     private final TimeModel timeModel;
     private final ClockModel clockModel;
 
-    private TimerState state = new TimerState(this) {
+    private TimerState state = new TimerState(this) { // something weird is happening, getID and getId both for some reason need to be declared??
         @Override
-        public int getId() {
+        public int getID() {
             throw new IllegalStateException();
         }
     };
 
-    protected void setState(final TimerState state) {
+
+    protected void setState(TimerState state) {
      state.onExit();
         state = nextState;
-        uiUpdateListener.updateState(state.getId());
+        uiUpdateListener.updateState(state.getID());
         state.onEntry();
     }
 
     // TODO CHANge
-        private TimerUIUpdateListener uiUpdateListener;
+    public TimerUIUpdateListener uiUpdateListener;
 
         @Override
         public void setUIUpdateListener(final TimerUIUpdateListener uiUpdateListener) {
@@ -49,13 +52,15 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
 
     //TODO change
         @Override public void updateUIRuntime() { uiUpdateListener.updateTime(timeModel.getRuntime()); }
-        @Override public void updateUILaptime() { uiUpdateListener.updateTime(timeModel.getLaptime()); }
+
+
+    //@Override public void updateUILaptime() { uiUpdateListener.updateTime(timeModel.getLaptime()); }
     //end of Change
 
-    //known states
-    private final TimerState STOPPED = new StoppedState(this);
-    private final TimerState RUNNING = new RunningState(this);
-    private final TimerState RINGING = new RingingState(this);
+   //known states
+    public TimerState STOPPED = new StoppedState(this);
+    public TimerState RUNNING = new RunningState(this);
+    public final TimerState RINGING = new RingingState();
 
     //transitions
     @Override public void toRunningState() {setState(RUNNING);}
@@ -70,6 +75,5 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     //@Override public void actionInc(){ timeModel.incRuntime(); actionUpdateView(); } // dont know if we need
     @Override public void actionUpdateView() { state.updateView(); }
 
-
-
+    public abstract int getID();
 }

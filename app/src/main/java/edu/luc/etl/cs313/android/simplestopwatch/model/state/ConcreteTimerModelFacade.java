@@ -14,7 +14,6 @@ public class ConcreteTimerModelFacade implements TimerModelFacade{
     private TimerStateMachine stateMachine;
 
     private ClockModel clockModel;
-
     private TimeModel timeModel;
 
     public ConcreteTimerModelFacade() {
@@ -30,18 +29,13 @@ public class ConcreteTimerModelFacade implements TimerModelFacade{
     }
 
     @Override
+    public void onButtonPress() {
+        stateMachine.onButtonPress();
+    }
+
+    @Override
     public void setUIUpdateListener(final TimerUIUpdateListener listener) {
         stateMachine.setUIUpdateListener(listener);
-    }
-
-    @Override
-    public void onStartStop() {
-        stateMachine.onStartStop();
-    }
-
-    @Override
-    public void onLapReset() {
-        stateMachine.onLapReset();
     }
 
 }

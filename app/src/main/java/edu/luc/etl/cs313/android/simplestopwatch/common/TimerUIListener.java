@@ -10,4 +10,5 @@ import edu.luc.etl.cs313.android.simplestopwatch.android.TimerAdapter;
 public interface TimerUIListener {
     void onStart();
     void onButtonPress();
+
 }

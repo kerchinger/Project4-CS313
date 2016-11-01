@@ -1,57 +1,36 @@
 package edu.luc.etl.cs313.android.simplestopwatch.model.state;
 
 import edu.luc.etl.cs313.android.simplestopwatch.R;
+import edu.luc.etl.cs313.android.simplestopwatch.model.clock.ClockModel;
+import edu.luc.etl.cs313.android.simplestopwatch.model.time.TimeModel;
 
-abstract class StoppedState extends TimerState {
+public class StoppedState extends DefaultTimerStateMachine {
+
+
+    ClockModel clockModel;
+    TimeModel timeModel;
+
 
     private final TimerState STOPPED = new TimerState(this) {
         @Override public void onEntry() {timeModel.reset(); updateUIRuntime();}
         @Override public void onButtonPress() {
             clockModel.restartTimeout(3);
-            timeModel.inc();
-            updateUIRuntime();
+            timeModel.inc(); updateUIRuntime();
         }
-        @Override public void onTimeout() {setState(RUNIING); }
+        @Override public void onTimeout() {setState(RUNNING); }
+
+
         @Override public int getID() {return R.string.STOPPED; }
 
     };
 
-    public StoppedState(TimerStateMachine sm) {
-        super(sm);
+    public StoppedState(TimeModel timeModel, ClockModel clockModel) {
+        super(timeModel, clockModel);
     }
 
-
-   /* public StoppedState(final TimerSMStateView sm) {
-        this.sm = sm;
-    }
-
-    private final TimerSMStateView sm;
 
     @Override
-    public void onStartStop() {
-        sm.actionStart();
-        sm.toRunningState();
+    public int getID() {
+        return R.string.RUNNING;
     }
-
-    @Override
-    public void onLapReset() {
-        sm.actionReset();
-        sm.toStoppedState();
-    }
-
-    @Override
-    public void onTick() {
-        throw new UnsupportedOperationException("onTick");
-    }
-
-    @Override
-    public void updateView() {
-        sm.updateUIRuntime();
-    }
-
-    @Override
-    public int getId() {
-        return R.string.STOPPED;
-    }
-    */
 }
