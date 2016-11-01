@@ -9,7 +9,6 @@ import org.junit.Test;
 import android.widget.Button;
 import android.widget.TextView;
 import edu.luc.etl.cs313.android.simplestopwatch.R;
-import edu.luc.etl.cs313.android.simplestopwatch.android.StopwatchAdapter;
 
 import static edu.luc.etl.cs313.android.simplestopwatch.common.Constants.SEC_PER_MIN;
 

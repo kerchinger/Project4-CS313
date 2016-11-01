@@ -9,10 +9,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.luc.etl.cs313.android.simplestopwatch.R;
-import edu.luc.etl.cs313.android.simplestopwatch.common.StopwatchUIUpdateListener;
+import edu.luc.etl.cs313.android.simplestopwatch.common.TimerUIUpdateListener;
 import edu.luc.etl.cs313.android.simplestopwatch.model.clock.ClockModel;
 import edu.luc.etl.cs313.android.simplestopwatch.model.clock.OnTickListener;
-import edu.luc.etl.cs313.android.simplestopwatch.model.state.StopwatchStateMachine;
 import edu.luc.etl.cs313.android.simplestopwatch.model.time.TimeModel;
 
 /**
@@ -141,7 +140,7 @@ public abstract class AbstractStopwatchStateMachineTest {
  *
  * @author laufer
  */
-class UnifiedMockDependency implements TimeModel, ClockModel, StopwatchUIUpdateListener {
+class UnifiedMockDependency implements TimeModel, ClockModel, TimerUIUpdateListener {
 
     private int timeValue = -1, stateId = -1;
 

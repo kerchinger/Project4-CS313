@@ -21,7 +21,7 @@ public class DefaultClockModel implements ClockModel {
         this.listener = listener;
     }
 
-    @Override
+   /* @Override
     public void start() {
         timer = new Timer();
 
@@ -31,7 +31,22 @@ public class DefaultClockModel implements ClockModel {
                 // fire event
                 listener.onTick();
             }
-        }, /*initial delay*/ 1000, /*periodic delay*/ 1000);
+        }, /*initial delay*/ //1000, /*periodic delay*/ 1000);
+    //}
+
+    //added by me and I beleive this is the right spot to add this
+    @Override
+    public void startTick(final int periodInSec){
+        if(recurring != null) throw new IllegalStateException();
+
+        recurring = new Timer():
+
+        recurring.schedule(new TimerTask(){
+            @)Override
+                    public void run() {
+                listener.onTick();
+            }
+        }, periodInSec * 1000, periodInSec * 1000);
     }
 
     @Override

@@ -1,7 +1,5 @@
 package edu.luc.etl.cs313.android.simplestopwatch.test.android;
 
-import edu.luc.etl.cs313.android.simplestopwatch.android.StopwatchAdapter;
-
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;

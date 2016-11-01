@@ -4,11 +4,11 @@ import edu.luc.etl.cs313.android.simplestopwatch.R;
 
 class RunningState implements StopwatchState {
 
-    public RunningState(final StopwatchSMStateView sm) {
+    public RunningState(final TimerSMStateView sm) {
         this.sm = sm;
     }
 
-    private final StopwatchSMStateView sm;
+    private final TimerSMStateView sm;
 
     @Override
     public void onStartStop() {

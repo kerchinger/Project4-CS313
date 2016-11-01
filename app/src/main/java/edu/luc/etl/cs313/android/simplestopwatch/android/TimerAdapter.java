@@ -5,27 +5,30 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
+
 import edu.luc.etl.cs313.android.simplestopwatch.R;
+import edu.luc.etl.cs313.android.simplestopwatch.common.TimerUIUpdateListener;
+import edu.luc.etl.cs313.android.simplestopwatch.common.TimerUIListener;
+import edu.luc.etl.cs313.android.simplestopwatch.common.TimerUIUpdateSource;
 import edu.luc.etl.cs313.android.simplestopwatch.common.Constants;
-import edu.luc.etl.cs313.android.simplestopwatch.common.StopwatchUIUpdateListener;
-import edu.luc.etl.cs313.android.simplestopwatch.model.ConcreteStopwatchModelFacade;
-import edu.luc.etl.cs313.android.simplestopwatch.model.StopwatchModelFacade;
+import edu.luc.etl.cs313.android.simplestopwatch.model.state.TimerModelFacade;
+import edu.luc.etl.cs313.android.simplestopwatch.model.state.ConcreteTimerModelFacade;
+
 
 /**
- * A thin adapter component for the stopwatch.
- *
- * @author laufer
+ * Created by kyleerchinger on 11/1/16.
  */
-public class StopwatchAdapter extends Activity implements StopwatchUIUpdateListener {
 
-    private static String TAG = "stopwatch-android-act1vity";
+public class TimerAdapter extends Activity implements TimerUIUpdateListener {
+
+    private static String TAG = "simletimer-android-act1vity";
 
     /**
      * The state-based dynamic model.
      */
-    private StopwatchModelFacade model;
+    private TimerModelFacade model;
 
-    protected void setModel(final StopwatchModelFacade model) {
+    protected void setModel(final TimerModelFacade model) {
         this.model = model;
     }
 
@@ -35,7 +38,7 @@ public class StopwatchAdapter extends Activity implements StopwatchUIUpdateListe
         // inject dependency on view so this adapter receives UI events
         setContentView(R.layout.activity_main);
         // inject dependency on model into this so model receives UI events
-        this.setModel(new ConcreteStopwatchModelFacade());
+        this.setModel(new ConcreteTimerModelFacade());
         // inject dependency on this into model to register for UI updates
         model.setUIUpdateListener(this);
     }
@@ -56,19 +59,22 @@ public class StopwatchAdapter extends Activity implements StopwatchUIUpdateListe
 
     /**
      * Updates the seconds and minutes in the UI.
+     *
      * @param time
      */
     public void updateTime(final int time) {
         // UI adapter responsibility to schedule incoming events on UI thread
-        runOnUiThread(() -> {
-            final TextView tvS = (TextView) findViewById(R.id.seconds);
-            final TextView tvM = (TextView) findViewById(R.id.minutes);
-            final int seconds = time % Constants.SEC_PER_MIN;
-            final int minutes = time / Constants.SEC_PER_MIN;
-            tvS.setText(Integer.toString(seconds / 10) + Integer.toString(seconds % 10));
-            tvM.setText(Integer.toString(minutes / 10) + Integer.toString(minutes % 10));
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                final TextView tvS = (TextView) findViewById(R.id.seconds);
+                tvS.setText(Integer.toString(time/10) + Integer.toString(time %10));
+            }
         });
     }
+
+
+
 
     /**
      * Updates the state name in the UI.
@@ -87,7 +93,5 @@ public class StopwatchAdapter extends Activity implements StopwatchUIUpdateListe
         model.onStartStop();
     }
 
-    public void onLapReset(final View view)  {
-        model.onLapReset();
-    }
+
 }
