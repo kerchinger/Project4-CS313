@@ -2,9 +2,26 @@ package edu.luc.etl.cs313.android.simplestopwatch.model.state;
 
 import edu.luc.etl.cs313.android.simplestopwatch.R;
 
-class StoppedState implements StopwatchState {
+abstract class StoppedState extends TimerState {
 
-    public StoppedState(final TimerSMStateView sm) {
+    private final TimerState STOPPED = new TimerState(this) {
+        @Override public void onEntry() {timeModel.reset(); updateUIRuntime();}
+        @Override public void onButtonPress() {
+            clockModel.restartTimeout(3);
+            timeModel.inc();
+            updateUIRuntime();
+        }
+        @Override public void onTimeout() {setState(RUNIING); }
+        @Override public int getID() {return R.string.STOPPED; }
+
+    };
+
+    public StoppedState(TimerStateMachine sm) {
+        super(sm);
+    }
+
+
+   /* public StoppedState(final TimerSMStateView sm) {
         this.sm = sm;
     }
 
@@ -36,4 +53,5 @@ class StoppedState implements StopwatchState {
     public int getId() {
         return R.string.STOPPED;
     }
+    */
 }

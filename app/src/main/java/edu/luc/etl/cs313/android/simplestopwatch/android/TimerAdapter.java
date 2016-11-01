@@ -90,7 +90,7 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
 
     // forward event listener methods to the model
     public void onStartStop(final View view) {
-        model.onStartStop();
+        model.onStart();
     }
 
 

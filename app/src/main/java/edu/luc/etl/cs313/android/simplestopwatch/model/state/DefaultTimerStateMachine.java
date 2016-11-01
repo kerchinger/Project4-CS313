@@ -17,11 +17,18 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     private final TimeModel timeModel;
     private final ClockModel clockModel;
 
-    private TimerState state;
+    private TimerState state = new TimerState(this) {
+        @Override
+        public int getId() {
+            throw new IllegalStateException();
+        }
+    };
 
-    protected setState(final TimerState state) {
-        this.state = state;
-        uiUpdateListener.updateState(state.getId()); //TODO gonna need to change this
+    protected void setState(final TimerState state) {
+     state.onExit();
+        state = nextState;
+        uiUpdateListener.updateState(state.getId());
+        state.onEntry();
     }
 
     // TODO CHANge
