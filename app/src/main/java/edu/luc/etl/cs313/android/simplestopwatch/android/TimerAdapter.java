@@ -81,40 +81,6 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
         });
     }
 
-    public void ringAlarm(boolean value){
-            Uri defaultRingtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-
-            MediaPlayer mediaPlayer = new MediaPlayer();
-            Context context = this; // added this to get context to not be red
-            try {
-                mediaPlayer.setDataSource(context, defaultRingtoneUri);
-                mediaPlayer.setAudioStreamType(AudioManager.STREAM_NOTIFICATION);
-                mediaPlayer.prepare();
-                mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
-
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-
-                if (value == true) { // controls whether or not the media player is on or off
-                    mediaPlayer.start();}
-                else{
-                    mediaPlayer.stop();
-                }
-                }catch(IllegalArgumentException e){
-                    e.printStackTrace();
-                }catch(SecurityException e){
-                    e.printStackTrace();
-                }catch(IllegalStateException e){
-                    e.printStackTrace();
-                }catch(IOException e){
-                    e.printStackTrace();
-                }
-    }
-
-
 
     /**
      * Updates the state name in the UI.
@@ -128,10 +94,16 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
         });
     }
 
+    @Override
+    public void ringAlarm(boolean b) {
+        //TODO still needs to be implememted idk exactly how this should go about, I thought that maybe the alarm should be puter
+        //here as a because it takes in a true and a false but idk
+    }
+
     // forward event listener methods to the model
     public void onStartStop(final View view) {
         model.onStart();
-    }
+    } // this in some sense is the button!!! so we might want to change this for a better understanding
 
 
 }

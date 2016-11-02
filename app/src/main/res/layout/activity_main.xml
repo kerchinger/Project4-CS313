@@ -32,30 +32,13 @@
         android:layout_centerHorizontal="true" >
 
         <TextView
-            android:id="@+id/minutes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/minutes"
-            android:textSize="80sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/colon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/minutes"
-            android:text="@string/colon"
-            android:textSize="80sp"
-            android:textStyle="bold" />
-
-        <TextView
             android:id="@+id/seconds"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/colon"
             android:text="@string/seconds"
             android:textSize="80sp"
             android:textStyle="bold" />
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -73,5 +56,14 @@
             android:text="@string/startStop" />
 
     </RelativeLayout>
+
+    <TextView
+        android:text="@string/STOPPED"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp" />
 
 </RelativeLayout>

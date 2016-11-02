@@ -6,10 +6,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Test;
 
-import dalvik.annotation.TestTarget;
-import edu.luc.etl.cs313.android.simplestopwatch.common.ClockListener;
+import edu.luc.etl.cs313.android.simplestopwatch.model.clock.ClockListener;
 import edu.luc.etl.cs313.android.simplestopwatch.model.clock.ClockModel;
-import edu.luc.etl.cs313.android.simplestopwatch.model.clock.OnTickListener;
 
 
 /**

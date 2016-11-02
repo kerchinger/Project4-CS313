@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.luc.etl.cs313.android.simplestopwatch.R;
-import edu.luc.etl.cs313.android.simplestopwatch.common.ClockListener;
+import edu.luc.etl.cs313.android.simplestopwatch.model.clock.ClockListener;
 import edu.luc.etl.cs313.android.simplestopwatch.common.TimerUIUpdateListener;
 import edu.luc.etl.cs313.android.simplestopwatch.model.clock.ClockModel;
 import edu.luc.etl.cs313.android.simplestopwatch.model.state.TimerStateMachine;
