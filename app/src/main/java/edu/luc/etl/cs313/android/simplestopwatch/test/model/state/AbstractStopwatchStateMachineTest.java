@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.luc.etl.cs313.android.simplestopwatch.R;
+import edu.luc.etl.cs313.android.simplestopwatch.common.ClockListener;
 import edu.luc.etl.cs313.android.simplestopwatch.common.TimerUIUpdateListener;
 import edu.luc.etl.cs313.android.simplestopwatch.model.clock.ClockModel;
 import edu.luc.etl.cs313.android.simplestopwatch.model.state.TimerStateMachine;
@@ -25,7 +26,7 @@ import edu.luc.etl.cs313.android.simplestopwatch.model.time.TimeModel;
  */
 public abstract class AbstractStopwatchStateMachineTest {
 
-    private StopwatchStateMachine model;
+    private TimerStateMachine model;
 
     private UnifiedMockDependency dependency;
 
@@ -45,7 +46,7 @@ public abstract class AbstractStopwatchStateMachineTest {
      *
      * @param model
      */
-    protected void setModel(final StopwatchStateMachine model) {
+    protected void setModel(final TimerStateMachine model) {
         this.model = model;
         if (model == null)
             return;
@@ -87,32 +88,29 @@ public abstract class AbstractStopwatchStateMachineTest {
      * @throws Throwable
      */
     @Test
-    public void testScenarioRunLapReset() {
+    publicvoidtestScenarioRun2(){
+        assertEquals(R.string.STOPPED,dependency.getState());
+        model.onButtonPress();
+        assertTimeEquals(1);
+        assertEquals(R.string.STOPPED,dependency.getState());
+        onButtonRepeat(MAX_TIME*2);
+        assertTimeEquals(MAX_TIME);
+        model.onTimeout();
+        assertEquals(R.string.RUNNING,dependency.getState());
+        onTickRepeat(50);
+        assertTimeEquals(MAX_TIME-50);
+        onTickRepeat(49);
         assertTimeEquals(0);
-        // directly invoke the button press event handler methods
-        model.onStartStop();
-        assertEquals(R.string.RUNNING, dependency.getState());
-        assertTrue(dependency.isStarted());
-        onTickRepeat(5);
-        assertTimeEquals(5);
-        model.onLapReset();
-        assertEquals(R.string.LAP_RUNNING, dependency.getState());
-        assertTrue(dependency.isStarted());
-        onTickRepeat(4);
-        assertTimeEquals(5);
-        model.onStartStop();
-        assertEquals(R.string.LAP_STOPPED, dependency.getState());
-        assertFalse(dependency.isStarted());
-        assertTimeEquals(5);
-        model.onLapReset();
-        assertEquals(R.string.STOPPED, dependency.getState());
-        assertFalse(dependency.isStarted());
-        assertTimeEquals(9);
-        model.onLapReset();
-        assertEquals(R.string.STOPPED, dependency.getState());
-        assertFalse(dependency.isStarted());
-        assertTimeEquals(0);
+        assertEquals(R.string.RINGING,dependency.getState());
+        assertTrue(dependency.isRinging());
+        onTickRepeat(3);
+        assertEquals(R.string.RINGING,dependency.getState());
+        assertTrue(dependency.isRinging());
+        model.onButtonPress();
+        assertFalse(dependency.isRinging());
+        assertEquals(R.string.STOPPED,dependency.getState());
     }
+
 
     /**
      * Sends the given number of tick events to the model.
@@ -144,9 +142,9 @@ class UnifiedMockDependency implements TimeModel, ClockModel, TimerUIUpdateListe
 
     private int timeValue = -1, stateId = -1;
 
-    private int runningTime = 0, lapTime = -1;
+    private int runningTime = 0, idleTime = -1;
 
-    private boolean started = false;
+    private boolean started = false, ringing = false;
 
     public int getTime() {
         return timeValue;
@@ -160,9 +158,13 @@ class UnifiedMockDependency implements TimeModel, ClockModel, TimerUIUpdateListe
         return started;
     }
 
+    public boolean isRinging() {
+        return ringing;
+    }
+
     @Override
-    public void updateTime(final int timeValue) {
-        this.timeValue = timeValue;
+    public void updateTime(final int tv) {
+        this.timeValue = tv;
     }
 
     @Override
@@ -171,42 +173,51 @@ class UnifiedMockDependency implements TimeModel, ClockModel, TimerUIUpdateListe
     }
 
     @Override
-    public void setOnTickListener(TimerStateMachine listener) {
+    public void ringAlarm(final boolean b) {
+        ringing = b;
+    }
+
+    @Override
+    public void setClockListener(final ClockListener listener) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void start() {
+    public void startTick(final int period) {
         started = true;
     }
 
     @Override
-    public void stop() {
+    public void stopTick() {
         started = false;
     }
 
     @Override
-    public void resetRuntime() {
+    public void restartTimeout(final int period) {
+    }
+
+    @Override
+    public void reset() {
         runningTime = 0;
     }
 
     @Override
-    public void incRuntime() {
-        runningTime++;
+    public void inc() {
+        if (runningTime != 99) {
+            runningTime++;
+        }
     }
 
     @Override
-    public int getRuntime() {
+    public void dec() {
+        if (runningTime != 0) {
+            runningTime--;
+        }
+    }
+
+    @Override
+    public int get() {
         return runningTime;
     }
 
-    @Override
-    public void setLaptime() {
-        lapTime = runningTime;
-    }
-
-    @Override
-    public int getLaptime() {
-        return lapTime;
-    }
 }

@@ -5,7 +5,7 @@ import edu.luc.etl.cs313.android.simplestopwatch.model.clock.ClockModel;
 import edu.luc.etl.cs313.android.simplestopwatch.model.clock.DefaultClockModel;
 import edu.luc.etl.cs313.android.simplestopwatch.model.time.DefaultTimeModel;
 import edu.luc.etl.cs313.android.simplestopwatch.model.time.TimeModel;
-import edu.luc.etl.cs313.android.simplestopwatch.model.state.TimerModelFacade;
+
 /**
  * Created by kyleerchinger on 11/1/16.
  */
@@ -19,7 +19,7 @@ public class ConcreteTimerModelFacade implements TimerModelFacade{
     public ConcreteTimerModelFacade() {
         timeModel = new DefaultTimeModel();
         clockModel = new DefaultClockModel();
-        stateMachine = new DefaultTimerStateMachine(timeModel, clockModel);
+        stateMachine = new DefaultTimerStateMachine();
         clockModel.setOnTickListener(stateMachine);
     }
 

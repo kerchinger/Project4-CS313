@@ -11,13 +11,13 @@ import edu.luc.etl.cs313.android.simplestopwatch.common.TimerUIUpdateListener;
 public abstract class DefaultTimerStateMachine implements TimerStateMachine {
 
     private TimerState nextState;
-
-    public DefaultTimerStateMachine(final TimeModel timeModel, final ClockModel clockModel){
-        this.timeModel = timeModel;
+    DefaultTimerStateMachine(TimeModel timeModel, ClockModel clockModel){
         this.clockModel = clockModel;
+        this.timeModel = timeModel;
     }
+
     private final TimeModel timeModel;
-    private final ClockModel clockModel;
+    private final  ClockModel clockModel;
 
     private TimerState state = new TimerState(this) { // something weird is happening, getID and getId both for some reason need to be declared??
         @Override

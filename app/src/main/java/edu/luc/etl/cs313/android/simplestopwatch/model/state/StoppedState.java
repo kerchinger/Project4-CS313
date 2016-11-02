@@ -25,7 +25,7 @@ public class StoppedState extends DefaultTimerStateMachine {
     };
 
     public StoppedState(TimeModel timeModel, ClockModel clockModel) {
-        super(timeModel, clockModel);
+        super();
     }
 
 

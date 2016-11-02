@@ -12,6 +12,7 @@ abstract class TimerState implements TimerUIListener, ClockListener{
 
     protected final TimerStateMachine sm;
 
+
     @Override
     public final void onStart() { onEntry();}
     public void onEntry() {}
