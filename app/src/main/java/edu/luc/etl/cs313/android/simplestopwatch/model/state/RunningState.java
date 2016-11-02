@@ -10,7 +10,7 @@ import edu.luc.etl.cs313.android.simplestopwatch.model.state.RingingState;
 
 public class RunningState extends DefaultTimerStateMachine {
 
-     ClockModel clockModel;
+    ClockModel clockModel;
     TimeModel timeModel;
 
 

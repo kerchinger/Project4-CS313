@@ -14,9 +14,8 @@ public class DefaultClockModel implements ClockModel {
     // TODO make accurate by keeping track of partial seconds when canceled etc.
 
     private Timer timer;
-
     private OnTickListener listener;
-    private Timer recurring; // TODO NOT HOW THIS WORKS or at least it shouldn't be how it works i dont think
+    private Timer recurring;
 
     @Override
     public void setOnTickListener(TimerStateMachine listener) { //FIXME as this doesn't make semse
@@ -41,7 +40,7 @@ public class DefaultClockModel implements ClockModel {
         }, periodInSec * 1000, periodInSec * 1000);
     }
 
-    @Override
+    /*@Override
     public void start() {
         timer = new Timer();
 
@@ -51,16 +50,22 @@ public class DefaultClockModel implements ClockModel {
                 // fire event
                 listener.onTick();
             }
-        }, /*initial delay*/ 1000, /*periodic delay*/ 1000);
+        }, /*initial delay*/ //1000, /*periodic delay*/ 1000);
+   // }
+    @Override
+    public void restartTimeout(int i) { // restarts the time from the point that it was stopped at
+
     }
 
     @Override
     public void stopTick(){timer.cancel();}
 
-    @Override
+
+
+   /* @Override // don't really need because we have a stopTick method
     public void stop() {
         timer.cancel();
-    }
+    }*/
 
 
 }

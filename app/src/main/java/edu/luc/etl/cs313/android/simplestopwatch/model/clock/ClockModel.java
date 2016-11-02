@@ -11,8 +11,8 @@ public interface ClockModel extends OnTickSource {
 
     void startTick(int periodInSec);
     void stopTick();
-    void start();
-    void stop();
+    //void start();
+    //void stop();
 
     void restartTimeout(int i); // TODO
 }

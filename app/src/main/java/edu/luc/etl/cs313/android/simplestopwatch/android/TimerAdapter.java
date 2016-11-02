@@ -5,6 +5,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
+import android.media.MediaPlayer; // added from here to
+import  android.media.AudioManager;
+import  android.media.RingtoneManager;
+import android.net.Uri;
+import java.io.IOException;
+import android.media.MediaPlayer.OnCompletionListener;
+import android.content.Context; // here for all of the MediaPlayer imports
+
 
 import edu.luc.etl.cs313.android.simplestopwatch.R;
 import edu.luc.etl.cs313.android.simplestopwatch.common.TimerUIUpdateListener;
@@ -73,6 +81,38 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
         });
     }
 
+    public void ringAlarm(boolean value){
+            Uri defaultRingtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+            MediaPlayer mediaPlayer = new MediaPlayer();
+            Context context = this; // added this to get context to not be red
+            try {
+                mediaPlayer.setDataSource(context, defaultRingtoneUri);
+                mediaPlayer.setAudioStreamType(AudioManager.STREAM_NOTIFICATION);
+                mediaPlayer.prepare();
+                mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
+
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.release();
+                    }
+                });
+
+                if (value == true) { // controls whether or not the media player is on or off
+                    mediaPlayer.start();}
+                else{
+                    mediaPlayer.stop();
+                }
+                }catch(IllegalArgumentException e){
+                    e.printStackTrace();
+                }catch(SecurityException e){
+                    e.printStackTrace();
+                }catch(IllegalStateException e){
+                    e.printStackTrace();
+                }catch(IOException e){
+                    e.printStackTrace();
+                }
+    }
 
 
 

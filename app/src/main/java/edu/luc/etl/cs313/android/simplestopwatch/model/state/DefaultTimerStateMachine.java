@@ -45,7 +45,7 @@ public abstract class DefaultTimerStateMachine implements TimerStateMachine {
 
 
     // UI thread or the timer thread
-    @Override public synchronized void onButtonPress() {state.onButtonPress(); }
+    @Override public  synchronized void onButtonPress() {state.onButtonPress(); }
     @Override public  synchronized void onTick() {state.onTick();}
     @Override public  synchronized void onTimeout() {state.onTimeout(); }
 
@@ -60,7 +60,7 @@ public abstract class DefaultTimerStateMachine implements TimerStateMachine {
    //known states
     public TimerState STOPPED = new StoppedState(this);
     public TimerState RUNNING = new RunningState(this);
-    public final TimerState RINGING = new RingingState();
+    public TimerState RINGING = new RingingState(this);
 
     //transitions
     @Override public void toRunningState() {setState(RUNNING);}
@@ -70,8 +70,8 @@ public abstract class DefaultTimerStateMachine implements TimerStateMachine {
     //actions
     @Override public void actionInit() {toStoppedState();; actionReset();}
     @Override public void actionReset(){timeModel.resetRuntime();actionUpdateView();}
-    @Override public void actionStart() {clockModel.start();}
-    @Override public void actionStop() {clockModel.stop();}
+    @Override public void actionStart() {clockModel.startTick(0);}
+    @Override public void actionStop() {clockModel.stopTick();}
     //@Override public void actionInc(){ timeModel.incRuntime(); actionUpdateView(); } // dont know if we need
     @Override public void actionUpdateView() { state.updateView(); }
 
