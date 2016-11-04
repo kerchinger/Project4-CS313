@@ -96,8 +96,42 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
 
     @Override
     public void ringAlarm(boolean b) {
-        //TODO still needs to be implememted idk exactly how this should go about, I thought that maybe the alarm should be puter
+        // TODO CHECK THIS, I thought that maybe the alarm should be puter
         //here as a because it takes in a true and a false but idk
+        Uri defaultRingtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        MediaPlayer mediaPlayer = new MediaPlayer();
+        Context context = null;
+
+        try {
+            mediaPlayer.setDataSource(context, defaultRingtoneUri);
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_NOTIFICATION);
+            mediaPlayer.prepare();
+            mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
+
+                @Override
+                public void onCompletion(MediaPlayer mp)
+                {
+                    mp.release();
+                }
+            });
+
+     if(b == true){
+            mediaPlayer.start();}
+     else{
+         mediaPlayer.stop();
+     }
+
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     // forward event listener methods to the model

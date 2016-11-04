@@ -75,7 +75,7 @@ public abstract class AbstractStopwatchStateMachineTest {
     public void testScenarioRun() {
         assertTimeEquals(0);
         // directly invoke the button press event handler methods
-        model.onStartStop();
+        model.onStartStop(); // should work I did not change the button name
         onTickRepeat(5);
         assertTimeEquals(5);
     }
@@ -220,4 +220,8 @@ class UnifiedMockDependency implements TimeModel, ClockModel, TimerUIUpdateListe
         return runningTime;
     }
 
+    @Override
+    public void setClockListener(TimerStateMachine listener) {
+
+    }
 }

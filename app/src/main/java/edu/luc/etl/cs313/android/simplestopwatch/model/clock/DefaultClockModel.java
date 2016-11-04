@@ -40,32 +40,18 @@ public class DefaultClockModel implements ClockModel {
 
     @Override
     public void stopTick() {
-
+    timer.cancel();
     }
 
     @Override
-    public void restartTimeout(int i) {
+    public void restartTimeout(int i) { // restarts from the time i
+        //TODO Implement THIS
 
     }
 
 
-    @Override
-    public void start() {
-        timer = new Timer();
-
-        // The clock model runs onTick every 1000 milliseconds
-        timer.schedule(new TimerTask() {
-            @Override public void run() {
-                // fire event
-                listener.onTick();
-            }
-        }, /*initial delay*/ 1000, /*periodic delay*/ 1000);
+    @Override // i do not know why but java made me implement this class, so this might mean something else is wrong
+    public void setClockListener(TimerStateMachine listener) {
+        this.listener = (ClockListener) listener;
     }
-
-    @Override
-    public void stop() {
-        timer.cancel();
-    }
-
-
 }

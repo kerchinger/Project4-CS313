@@ -38,5 +38,7 @@ public interface TimerStateMachine {
 
     //@Override public void actionInc(){ timeModel.incRuntime(); actionUpdateView(); } // dont know if we need
     void actionUpdateView();
+
+    void onStartStop();
 }
 //how it should sort of look public interface StopwatchStateMachine extends TimerUIListener, OnTickListener, TimerUIUpdateSource, TimerSMStateView { }
