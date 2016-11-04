@@ -25,5 +25,9 @@ public class DefaultTimeModel implements TimeModel {
     @Override
     public void reset() {
         runningTime = 0;
-    }
+    @Override
+    public int get() {return 0;}
+
+    @Override
+    public void inc(){}
 }

@@ -23,7 +23,9 @@ public class StoppedState extends TimerState {
 
     };
 
+        super(timeModel, clockModel);
 
+    @Override public void onStartStop() {}
 
     @Override
     public int getID() {

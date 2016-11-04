@@ -7,9 +7,11 @@ import edu.luc.etl.cs313.android.simplestopwatch.model.clock.ClockModel;
 import edu.luc.etl.cs313.android.simplestopwatch.model.time.TimeModel;
 
 public class RunningState extends TimerState {
-    public RunningState(TimerStateMachine sm) {
-        super(sm);
+
+    RunningState(TimeModel timeModel, ClockModel clockModel, TimerSMStateView sm){
+        super(timeModel, clockModel);
     }
+
     ClockModel clockModel;
     TimeModel timeModel;
 
@@ -27,6 +29,7 @@ public class RunningState extends TimerState {
 
     };
 
+    @Override public void onStartStop() {}
 
 
 
