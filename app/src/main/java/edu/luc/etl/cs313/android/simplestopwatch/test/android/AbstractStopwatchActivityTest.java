@@ -23,6 +23,10 @@ import static edu.luc.etl.cs313.android.simplestopwatch.common.Constants.SEC_PER
  */
 public abstract class AbstractStopwatchActivityTest {
 
+    private static final long STOPPED = Long.parseLong(null); // also don;t know how correct these two are
+    private static final long RUNNING = Long.parseLong(null);
+
+
     /**
      * Verifies that the activity under test can be launched.
      */
@@ -50,13 +54,13 @@ public abstract class AbstractStopwatchActivityTest {
     public void testActivityScenarioRun() throws Throwable {
         getActivity().runOnUiThread(() -> {
             assertEquals(0, getDisplayedValue());
-            assertTrue(getStartStopButton().performClick());
+            assertTrue(getButton().performClick());
         });
         Thread.sleep(5500); // <-- do not run this in the UI thread!
         runUiThreadTasks();
         getActivity().runOnUiThread(() -> {
             assertEquals(5, getDisplayedValue());
-            assertTrue(getStartStopButton().performClick());
+            assertTrue(getButton().performClick());
         });
     }
 
@@ -117,7 +121,12 @@ public abstract class AbstractStopwatchActivityTest {
         return SEC_PER_MIN * tvToInt(ts);
     }
 
-    protected Button getStartStopButton() {
+    protected String getStateValue(){
+        final TextView ts1 = (TextView) getActivity().findViewById(R.id.stateName);
+        return ts1.toString(); // I don't know how correct this is
+    }
+
+    protected Button getButton() {
         return (Button) getActivity().findViewById(R.id.startStop);
     }
 

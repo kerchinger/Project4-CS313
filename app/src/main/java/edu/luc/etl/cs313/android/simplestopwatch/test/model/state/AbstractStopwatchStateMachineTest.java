@@ -26,6 +26,7 @@ import edu.luc.etl.cs313.android.simplestopwatch.model.time.TimeModel;
  */
 public abstract class AbstractStopwatchStateMachineTest {
 
+    private static final int MAX_TIME = 99;// Max time should be 99 because that is as high as we can go
     private TimerStateMachine model;
 
     private UnifiedMockDependency dependency;
@@ -75,7 +76,7 @@ public abstract class AbstractStopwatchStateMachineTest {
     public void testScenarioRun() {
         assertTimeEquals(0);
         // directly invoke the button press event handler methods
-        model.onStartStop(); // should work I did not change the button name
+        model.onStart();
         onTickRepeat(5);
         assertTimeEquals(5);
     }
@@ -88,7 +89,7 @@ public abstract class AbstractStopwatchStateMachineTest {
      * @throws Throwable
      */
     @Test
-    publicvoidtestScenarioRun2(){
+    public void testScenarioRun2(){
         assertEquals(R.string.STOPPED,dependency.getState());
         model.onButtonPress();
         assertTimeEquals(1);
@@ -109,6 +110,12 @@ public abstract class AbstractStopwatchStateMachineTest {
         model.onButtonPress();
         assertFalse(dependency.isRinging());
         assertEquals(R.string.STOPPED,dependency.getState());
+    }
+
+    private void onButtonRepeat(int t) {
+        for(int i =0; i< t; i++){
+            model.onButtonPress(); // TODO check idk how accureate this, it may be more like the onTickRepear() which is below
+        }
     }
 
 
@@ -146,82 +153,71 @@ class UnifiedMockDependency implements TimeModel, ClockModel, TimerUIUpdateListe
 
     private boolean started = false, ringing = false;
 
+    //theses are the instance variables and the getters enable to tesst whether the SUT produced the expedcted changes in the mock Object
     public int getTime() {
         return timeValue;
     }
-
     public int getState() {
         return stateId;
     }
-
     public boolean isStarted() {
         return started;
-    }
-
+    } // method is used to don't worry about it
     public boolean isRinging() {
         return ringing;
     }
 
+    // TimeUIUpdateListener
     @Override
     public void updateTime(final int tv) {
         this.timeValue = tv;
     }
-
     @Override
     public void updateState(final int stateId) {
         this.stateId = stateId;
     }
-
     @Override
     public void ringAlarm(final boolean b) {
         ringing = b;
     }
 
+    // ClockModel
     @Override
     public void setClockListener(final ClockListener listener) {
         throw new UnsupportedOperationException();
     }
-
     @Override
     public void startTick(final int period) {
         started = true;
     }
-
     @Override
     public void stopTick() {
         started = false;
     }
-
     @Override
     public void restartTimeout(final int period) {
     }
 
+    // TimeModel
     @Override
     public void reset() {
         runningTime = 0;
     }
-
     @Override
     public void inc() {
         if (runningTime != 99) {
             runningTime++;
         }
     }
-
     @Override
     public void dec() {
         if (runningTime != 0) {
             runningTime--;
         }
     }
-
     @Override
     public int get() {
         return runningTime;
     }
 
-    @Override
-    public void setClockListener(TimerStateMachine listener) {
-
-    }
 }

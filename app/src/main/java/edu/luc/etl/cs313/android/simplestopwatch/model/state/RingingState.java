@@ -8,9 +8,16 @@ import edu.luc.etl.cs313.android.simplestopwatch.model.time.TimeModel;
  * Created by kyleerchinger on 11/1/16.
  */
 
-public class RingingState extends DefaultTimerStateMachine{
+public class RingingState extends TimerState{
 
+    public RingingState(TimerStateMachine sm) {
+        super(sm);
+    }
 
+    @Override
+    public int getID() {
+        return R.string.RINGING;
+    }
 
     private final TimerState RINGING = new TimerState(this){
         @Override public void onEntry() {uiUpdateListener.ringAlarm(true); }
@@ -19,12 +26,5 @@ public class RingingState extends DefaultTimerStateMachine{
         @Override public int getID() {return R.string.RINGING; }
     };
 
-    public RingingState(TimeModel timeModel, ClockModel clockModel) {
-        super();
-    }
-
-    @Override
-    public int getID() {
-        return R.string.RINGING;}
 
 }

@@ -7,13 +7,7 @@ package edu.luc.etl.cs313.android.simplestopwatch.model.time;
  * @author laufer
  */
 public interface TimeModel {
-    void resetRuntime();
-    void incRuntime();
-    int getRuntime();
-    void setLaptime();
-    int getLaptime();
-
-    void dec(); // TODO Make sure these are implemented in proper class
+    void dec();
     int get();
     void inc();
     void reset();

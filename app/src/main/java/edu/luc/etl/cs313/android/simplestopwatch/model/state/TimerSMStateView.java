@@ -11,19 +11,17 @@ interface TimerSMStateView {
     // transitions
     void toRunningState();
     void toStoppedState();
-    void toLapRunningState();
-    void toLapStoppedState();
+    void toRingingState();
 
     // actions
     void actionInit();
     void actionReset();
     void actionStart();
     void actionStop();
-    void actionLap();
     void actionInc();
+    void actionDec();
     void actionUpdateView();
 
     // state-dependent UI updates
     void updateUIRuntime();
-    void updateUILaptime();
 }

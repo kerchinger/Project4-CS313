@@ -1,22 +1,22 @@
 package edu.luc.etl.cs313.android.simplestopwatch.model.state;
 
+import java.util.Timer;
+
 import edu.luc.etl.cs313.android.simplestopwatch.R;
 import edu.luc.etl.cs313.android.simplestopwatch.model.clock.ClockModel;
 import edu.luc.etl.cs313.android.simplestopwatch.model.time.TimeModel;
 
-public class RunningState extends DefaultTimerStateMachine {
-    RunningState(final TimerSMStateView sm){
-        this.sm = sm;
+public class RunningState extends TimerState {
+    public RunningState(TimerStateMachine sm) {
+        super(sm);
     }
-    private final TimerSMStateView sm;
-
     ClockModel clockModel;
     TimeModel timeModel;
 
-
     private final TimerState RUNNING = new TimerState(this) {
 
-        @Override public void onEntry() {clockModel.startTick(1); }
+        @Override public void onEntry() {
+            clockModel.startTick(1); }
         @Override public void onExit() {clockModel.stopTick(); }
         @Override public void onButtonPress() {setState(STOPPED);}
         @Override public void onTick() {
@@ -26,6 +26,7 @@ public class RunningState extends DefaultTimerStateMachine {
         @Override public int getID() {return R.string.RUNNING; }
 
     };
+
 
 
 

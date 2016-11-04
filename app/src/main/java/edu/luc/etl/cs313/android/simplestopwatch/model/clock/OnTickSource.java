@@ -9,5 +9,6 @@ import edu.luc.etl.cs313.android.simplestopwatch.model.state.TimerStateMachine;
  * @author laufer
  */
 public interface OnTickSource {
-    void setClockListener(TimerStateMachine listener);
+    void setClockListener(ClockListener listener);
+
 }

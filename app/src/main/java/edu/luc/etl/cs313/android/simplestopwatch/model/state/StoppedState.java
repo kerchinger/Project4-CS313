@@ -4,12 +4,11 @@ import edu.luc.etl.cs313.android.simplestopwatch.R;
 import edu.luc.etl.cs313.android.simplestopwatch.model.clock.ClockModel;
 import edu.luc.etl.cs313.android.simplestopwatch.model.time.TimeModel;
 
-public class StoppedState extends DefaultTimerStateMachine {
+public class StoppedState extends TimerState {
 
-
-    ClockModel clockModel;
-    TimeModel timeModel;
-
+    public StoppedState(TimerStateMachine sm) {
+        super(sm);
+    }
 
     private final TimerState STOPPED = new TimerState(this) {
         @Override public void onEntry() {timeModel.reset(); updateUIRuntime();}
@@ -24,9 +23,6 @@ public class StoppedState extends DefaultTimerStateMachine {
 
     };
 
-    public StoppedState(TimeModel timeModel, ClockModel clockModel) {
-        super();
-    }
 
 
     @Override

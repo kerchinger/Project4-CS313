@@ -5,19 +5,6 @@
     android:layout_height="match_parent"
     android:layout_marginTop="10dp" >
 
-    <RelativeLayout
-        android:id="@+id/state"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true" >
-
-        <TextView
-            android:id="@+id/stateName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="40sp" />
-    </RelativeLayout>
-
     <!--
          TODO Why can't I define textSize and textStyle
     	 in the timer container and have it inherited
@@ -57,13 +44,18 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:text="@string/STOPPED"
+    <RelativeLayout
+        android:id="@+id/state"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="30sp" />
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/stateName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40sp" />
+    </RelativeLayout>
 
 </RelativeLayout>

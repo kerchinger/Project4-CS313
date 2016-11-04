@@ -16,11 +16,8 @@ import android.content.Context; // here for all of the MediaPlayer imports
 
 import edu.luc.etl.cs313.android.simplestopwatch.R;
 import edu.luc.etl.cs313.android.simplestopwatch.common.TimerUIUpdateListener;
-import edu.luc.etl.cs313.android.simplestopwatch.common.TimerUIListener;
-import edu.luc.etl.cs313.android.simplestopwatch.common.TimerUIUpdateSource;
-import edu.luc.etl.cs313.android.simplestopwatch.common.Constants;
-import edu.luc.etl.cs313.android.simplestopwatch.model.state.TimerModelFacade;
-import edu.luc.etl.cs313.android.simplestopwatch.model.state.ConcreteTimerModelFacade;
+import edu.luc.etl.cs313.android.simplestopwatch.model.TimerModelFacade;
+import edu.luc.etl.cs313.android.simplestopwatch.model.ConcreteTimerModelFacade;
 
 
 /**
@@ -89,8 +86,18 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
     public void updateState(final int stateId) {
         // UI adapter responsibility to schedule incoming events on UI thread
         runOnUiThread(() -> {
-            final TextView stateName = (TextView) findViewById(R.id.stateName);
+            final TextView stateName = (TextView) findViewById(R.id.stateName); // so you can;t see this in the app, as of right now, but its there
             stateName.setText(getString(stateId));
+        });
+    }
+
+    // TODO: Question: Do we want the Button name to change??? If so we would have to implement that!!
+    // I believe it would look something like this:
+
+    public void updateButtonValue( final int ButtonID){
+        runOnUiThread(() -> {
+            final TextView stateName = (TextView) findViewById(R.id.startStop); // so you can;t see this in the app, as of right now, but its there
+            stateName.setText(getString(ButtonID));
         });
     }
 

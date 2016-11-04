@@ -49,9 +49,4 @@ public class DefaultClockModel implements ClockModel {
 
     }
 
-
-    @Override // i do not know why but java made me implement this class, so this might mean something else is wrong
-    public void setClockListener(TimerStateMachine listener) {
-        this.listener = (ClockListener) listener;
-    }
 }
