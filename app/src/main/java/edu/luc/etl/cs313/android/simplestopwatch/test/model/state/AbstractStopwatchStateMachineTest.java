@@ -31,8 +31,6 @@ public abstract class AbstractStopwatchStateMachineTest {
 
     private UnifiedMockDependency dependency;
 
-    int MAX_TIME = 99;
-
     @Before
     public void setUp() throws Exception {
         dependency = new UnifiedMockDependency();
@@ -96,7 +94,7 @@ public abstract class AbstractStopwatchStateMachineTest {
         model.onButtonPress();
         assertTimeEquals(1);
         assertEquals(R.string.STOPPED,dependency.getState());
-        //onButtonRepeat(MAX_TIME*2);
+        onButtonRepeat(MAX_TIME*2);
         assertTimeEquals(MAX_TIME);
         model.onTimeout();
         assertEquals(R.string.RUNNING,dependency.getState());
@@ -170,16 +168,6 @@ class UnifiedMockDependency implements TimeModel, ClockModel, TimerUIUpdateListe
     }
 
     // TimeUIUpdateListener
-    @Override
-    public void resetRuntime() {}
-
-    @Override
-    public void incRuntime() {}
-
-    @Override
-    public int getRuntime() {return 0;}
-
-
     @Override
     public void updateTime(final int tv) {
         this.timeValue = tv;

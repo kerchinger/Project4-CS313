@@ -21,7 +21,7 @@ public class ConcreteTimerModelFacade implements TimerModelFacade {
     public ConcreteTimerModelFacade() {
         timeModel = new DefaultTimeModel();
         clockModel = new DefaultClockModel();
-        stateMachine = new StoppedState(timeModel, clockModel);
+        stateMachine = new DefaultTimerStateMachine(timeModel, clockModel);
         clockModel.setClockListener(stateMachine);
     }
 

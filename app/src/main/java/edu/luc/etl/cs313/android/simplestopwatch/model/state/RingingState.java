@@ -26,7 +26,5 @@ public class RingingState extends TimerState{
         @Override public int getID() {return R.string.RINGING; }
     };
 
-        super(timeModel, clockModel);
 
-    @Override public void onStartStop() {}
 }

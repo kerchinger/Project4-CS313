@@ -78,10 +78,10 @@ public abstract class AbstractStopwatchActivityTest {
     @Test
     public void testScenarioRun2() throws Throwable{
         getActivity().runOnUiThread(new Runnable() { @Override public void run() {
-            //assertEquals(STOPPED, getStateValue());
+            assertEquals(STOPPED, getStateValue());
             assertEquals(0, getDisplayedValue());
             for(int i= 0; i <5; i++){
-                //    assertTrue(getButton().performClick());
+                assertTrue(getButton().performClick());
             }
         }});
         runUiThreadTasks();
@@ -91,19 +91,19 @@ public abstract class AbstractStopwatchActivityTest {
         Thread.sleep(3200);
         runUiThreadTasks();
         getActivity().runOnUiThread(new Runnable(){@Override public void run(){
-            // assertEquals(RUNNING, getStateValue());
+            assertEquals(RUNNING, getStateValue());
             assertEquals(5, getDisplayedValue());
         }});
         Thread.sleep(3200);
         runUiThreadTasks();
         getActivity().runOnUiThread(new Runnable(){@Override public void run(){
-            //  assertEquals(RUNNING, getStateValue());
+            assertEquals(RUNNING, getStateValue());
             assertEquals(2, getDisplayedValue());
-            // assertTrue(getButton().performClick());
+            assertTrue(getButton().performClick());
         }});
         runUiThreadTasks();
         getActivity().runOnUiThread(new Runnable() { @Override public void run(){
-            //    assertEquals(STOPPED, getStateValue());
+            assertEquals(STOPPED, getStateValue());
         }});
 
     }

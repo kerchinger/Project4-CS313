@@ -14,17 +14,17 @@ import edu.luc.etl.cs313.android.simplestopwatch.test.android.AbstractStopwatchA
  * @author laufer
  * @see http://developer.android.com/tools/testing/activity_testing.html
  */
-public class StopwatchActivityTest extends ActivityInstrumentationTestCase2<TimerAdapter> {
+public class StopwatchActivityTest extends ActivityInstrumentationTestCase2<StopwatchAdapter> {
 
     /**
      * Creates an {@link ActivityInstrumentationTestCase2} for the
      * {@link SkeletonActivity} activity.
      */
     public StopwatchActivityTest() {
-        super(TimerAdapter.class);
+        super(StopwatchAdapter.class);
         actualTest = new AbstractStopwatchActivityTest() {
             @Override
-            protected TimerAdapter getActivity() {
+            protected StopwatchAdapter getActivity() {
                 // return activity instance provided by instrumentation test
                 return StopwatchActivityTest.this.getActivity();
             }
@@ -42,6 +42,6 @@ public class StopwatchActivityTest extends ActivityInstrumentationTestCase2<Time
     }
 
     public void testActivityScenarioRunLapReset() throws Throwable {
-        //actualTest.testActivityScenarioRunLapReset();
+        actualTest.testActivityScenarioRunLapReset();
     }
 }

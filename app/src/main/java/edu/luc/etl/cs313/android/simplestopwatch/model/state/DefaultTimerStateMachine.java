@@ -13,15 +13,12 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
 
 
     public DefaultTimerStateMachine(TimeModel timeModel, ClockModel clockModel){
-            this.clockModel = clockModel;
-            this.timeModel = timeModel;
-            this.STOPPED = new TimerState(new StoppedState(timeModel, clockModel));
-            this.RUNNING = new TimerState(new RunningState(timeModel, clockModel, null));
-            this.RINGING = new TimerState(new RingingState(timeModel, clockModel));
+        this.clockModel = clockModel;
+        this.timeModel = timeModel;
     }
 
     private final TimeModel timeModel;
-    private final ClockModel clockModel;
+    private final  ClockModel clockModel;
 
     private TimerState nextState;
     private TimerState state;
@@ -56,13 +53,11 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
 
     @Override public void updateUIRuntime() { uiUpdateListener.updateTime(timeModel.get()); }
 
-    //@Override public void updateUILaptime() { uiUpdateListener.updateTime(timeModel.getLaptime()); }
-    //end of Change
 
    //known states
-    public TimerState STOPPED;
-    public TimerState RUNNING;
-    public TimerState RINGING;
+    private final TimerState STOPPED = new StoppedState(this);
+    private final TimerState RUNNING = new RunningState(this);
+    private final TimerState RINGING = new RingingState(this);
 
     //transitions
     @Override public void toRunningState() {setState(RUNNING);}
@@ -75,6 +70,7 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     @Override public void actionStart() {clockModel.startTick(0);}
     @Override public void actionStop() {clockModel.stopTick();}
     @Override public void actionInc(){ timeModel.inc(); actionUpdateView(); } // THERE MAY BE AN ActionDec() idk actually i think there is also an INC
-    @Override public void actionUpdateView() { }
+    @Override public void actionDec(){ timeModel.dec(); actionUpdateView(); }
+    @Override public void actionUpdateView() { state.updateView(); }
 
 }

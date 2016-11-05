@@ -7,7 +7,7 @@ import edu.luc.etl.cs313.android.simplestopwatch.common.TimerUIListener;
  * Created by kyleerchinger on 11/1/16.
  */
 
-class TimerState implements TimerUIListener, ClockListener{
+abstract class TimerState implements TimerUIListener, ClockListener{
     public TimerState(final TimerStateMachine sm) {this.sm = sm;}
 
     protected final TimerStateMachine sm;
@@ -20,7 +20,7 @@ class TimerState implements TimerUIListener, ClockListener{
     public void onButtonPress() {}
     public void onTick() {}
     public void onTimeout() {}
-    public int getID() {return 0;}
+    public abstract int getID();
 
 
     public void updateView() {} // I beleive this is where this goes
