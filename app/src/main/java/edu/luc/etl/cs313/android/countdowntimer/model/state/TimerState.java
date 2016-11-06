@@ -8,21 +8,17 @@ import edu.luc.etl.cs313.android.countdowntimer.common.TimerUIListener;
  */
 
 abstract class TimerState implements TimerUIListener, ClockListener{
-    public TimerState(final TimerState sm) {this.sm = sm;}
+    public TimerState(final TimerSMStateView sm) {this.sm = sm;}
 
-    protected final TimerState sm;
-
+    protected final TimerSMStateView sm;
 
     @Override
-    public final void onStart() { onEntry();}
+    public void onStart() {}
     public void onEntry() {}
     public void onExit() {}
     public void onButtonPress() {}
     public void onTick() {}
     public void onTimeout() {}
     public abstract int getID();
-
-
-    public void updateView() {} // I beleive this is where this goes
 }
 

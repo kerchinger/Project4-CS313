@@ -9,9 +9,6 @@ import edu.luc.etl.cs313.android.countdowntimer.common.TimerUIUpdateListener;
  */
 
 public class DefaultTimerStateMachine implements TimerStateMachine {
-
-
-
     public DefaultTimerStateMachine(TimeModel timeModel, ClockModel clockModel){
         this.clockModel = clockModel;
         this.timeModel = timeModel;
@@ -20,12 +17,14 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     private final TimeModel timeModel;
     private final  ClockModel clockModel;
 
-    private TimerState nextState;
     private TimerState state;
 
     protected void setState(TimerState state) {
-     state.onExit();
-        state = nextState;
+        //takes previous state out and sets new state
+        if(this.state != null) {
+            this.state.onExit();
+        }
+        this.state = state;
         uiUpdateListener.updateState(state.getID());
         state.onEntry();
     }
@@ -45,34 +44,30 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
 
     }
 
-    // UI thread or the timer thread
-    @Override public  synchronized void onButtonPress() {state.onButtonPress(); }
-    @Override public  synchronized void onTick() {state.onTick();}
-    @Override public  synchronized void onTimeout() {state.onTimeout(); }
-
+    //UI thread or the timer thread
+    @Override public  synchronized void onButtonPress() { state.onButtonPress(); }
+    @Override public  synchronized void onTick() { state.onTick(); }
+    @Override public  synchronized void onTimeout() { state.onTimeout(); }
 
     @Override public void updateUIRuntime() { uiUpdateListener.updateTime(timeModel.get()); }
 
-
    //known states
-    //private final TimerState STOPPED = new StoppedState(this);
-    //private final TimerState RUNNING = new RunningState(this);
-    //private final TimerState RINGING = new RingingState(this);
+    private final TimerState STOPPED = new StoppedState(this);
+    private final TimerState RUNNING = new RunningState(this);
+    private final TimerState RINGING = new RingingState(this);
 
     //transitions
-    //@Override public void toRunningState() {setState(RUNNING);}
-    //@Override public void toStoppedState() {setState(STOPPED);}
-    //@Override public void toRingingState() {setState(RINGING);}
+    @Override public void toRunningState() {setState(RUNNING);}
+    @Override public void toStoppedState() {setState(STOPPED);}
+    @Override public void toRingingState() {setState(RINGING);}
 
     //actions
-    @Override public void actionInit() {
-        //toStoppedState();; actionReset();
-    }
-    @Override public void actionReset(){timeModel.reset();actionUpdateView();}
-    @Override public void actionStart() {clockModel.startTick(0);}
-    @Override public void actionStop() {clockModel.stopTick();}
-    @Override public void actionInc(){ timeModel.inc(); actionUpdateView(); } // THERE MAY BE AN ActionDec() idk actually i think there is also an INC
-    @Override public void actionDec(){ timeModel.dec(); actionUpdateView(); }
-    @Override public void actionUpdateView() { state.updateView(); }
+    @Override public void actionInit() { toStoppedState(); }
+    //@Override public void actionReset(){timeModel.reset();actionUpdateView();}
+    //@Override public void actionStart() {clockModel.startTick(0);}
+    //@Override public void actionStop() {clockModel.stopTick();}
+    //@Override public void actionInc(){ timeModel.inc(); actionUpdateView(); } // THERE MAY BE AN ActionDec() idk actually i think there is also an INC
+    //@Override public void actionDec(){ timeModel.dec(); actionUpdateView(); }
+    //@Override public void actionUpdateView() { state.updateView(); }
 
 }

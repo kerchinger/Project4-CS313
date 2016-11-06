@@ -8,25 +8,23 @@ import edu.luc.etl.cs313.android.countdowntimer.R;
 
 public class RingingState extends TimerState{
 
-    public RingingState(TimerState sm) {
+    public RingingState(TimerSMStateView sm) {
         super(sm);
     }
+    
+    //private final TimerState RINGING = new TimerState(this){
+    //    @Override public void onEntry() {
+    //        //uiUpdateListener.ringAlarm(true);
+    //    }
+    //    @Override public void onExit() {
+    //        //uiUpdateListener.ringAlarm(false);
+    //    }
+    //    @Override public void onButtonPress() {
+    //        //setState(STOPPED);
+    //    }
+    //    @Override public int getID() {return R.string.RINGING; }
+    //};
 
     @Override
-    public int getID() {
-        return R.string.RINGING;
-    }
-
-    private final TimerState RINGING = new TimerState(this){
-        @Override public void onEntry() {
-            //uiUpdateListener.ringAlarm(true);
-        }
-        @Override public void onExit() {
-            //uiUpdateListener.ringAlarm(false);
-        }
-        @Override public void onButtonPress() {
-            //setState(STOPPED);
-        }
-        @Override public int getID() {return R.string.RINGING; }
-    };
+    public int getID() { return R.string.RINGING; }
 }

@@ -10,12 +10,25 @@
     	 in the timer container and have it inherited
     	 by the TextViews?
     -->
+    <RelativeLayout
+        android:id="@+id/state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/stateName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="State"
+            android:textSize="40sp" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_below="@id/state"
         android:layout_centerHorizontal="true" >
 
         <TextView
@@ -43,19 +56,4 @@
             android:text="@string/button" />
 
     </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/state"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
-
-        <TextView
-            android:id="@+id/stateName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="40sp" />
-    </RelativeLayout>
-
 </RelativeLayout>

@@ -7,20 +7,19 @@ package edu.luc.etl.cs313.android.countdowntimer.model.state;
  * @author laufer
  */
 interface TimerSMStateView {
-
     // transitions
-    //void toRunningState();
-    //void toStoppedState();
-    //void toRingingState();
+    void toRunningState();
+    void toStoppedState();
+    void toRingingState();
 
     // actions
     void actionInit();
-    void actionReset();
-    void actionStart();
-    void actionStop();
-    void actionInc();
-    void actionDec();
-    void actionUpdateView();
+    //void actionReset();
+    //void actionStart();
+    //void actionStop();
+    //void actionInc();
+    //void actionDec();
+    //void actionUpdateView();
 
     // state-dependent UI updates
     void updateUIRuntime();
