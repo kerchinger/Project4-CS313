@@ -88,7 +88,7 @@ In Android Studio:
 
 * `View > Tool Windows > Build Variants`
 * `Test Artifact: Android Instrumentation Tests`
-* right-click on `app/java/edu...simplestopwatch (androidTest)`, then choose `Run Tests in edu...`
+* right-click on `app/java/edu...countdowntimer (androidTest)`, then choose `Run Tests in edu...`
 
 You can also use Gradle:
 
