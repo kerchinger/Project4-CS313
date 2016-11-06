@@ -22,4 +22,5 @@ public class DefaultClockModelTest extends AbstractClockModelTest {
     public void tearDown() throws Exception {
         setModel(null);
     }
+
 }

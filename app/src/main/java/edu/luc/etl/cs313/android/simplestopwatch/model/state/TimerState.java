@@ -8,9 +8,9 @@ import edu.luc.etl.cs313.android.simplestopwatch.common.TimerUIListener;
  */
 
 abstract class TimerState implements TimerUIListener, ClockListener{
-    public TimerState(final TimerStateMachine sm) {this.sm = sm;}
+    public TimerState(final TimerState sm) {this.sm = sm;}
 
-    protected final TimerStateMachine sm;
+    protected final TimerState sm;
 
 
     @Override

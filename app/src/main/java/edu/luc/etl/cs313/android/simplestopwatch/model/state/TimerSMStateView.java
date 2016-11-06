@@ -9,9 +9,9 @@ package edu.luc.etl.cs313.android.simplestopwatch.model.state;
 interface TimerSMStateView {
 
     // transitions
-    void toRunningState();
-    void toStoppedState();
-    void toRingingState();
+    //void toRunningState();
+    //void toStoppedState();
+    //void toRingingState();
 
     // actions
     void actionInit();

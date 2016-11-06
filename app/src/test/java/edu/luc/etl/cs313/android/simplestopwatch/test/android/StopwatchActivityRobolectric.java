@@ -13,27 +13,27 @@ import org.robolectric.annotation.Config;
  * @author laufer
  * @see http://pivotal.github.com/robolectric
  */
-@RunWith(RobolectricTestRunner.class)
-@Config(manifest = "src/main/AndroidManifest.xml", emulateSdk=18)
-public class StopwatchActivityRobolectric extends AbstractStopwatchActivityTest {
+//@RunWith(RobolectricTestRunner.class)
+//@Config(manifest = "src/main/AndroidManifest.xml", emulateSdk=18)
+//public class StopwatchActivityRobolectric extends AbstractStopwatchActivityTest {
 
-    private static String TAG = "stopwatch-android-act1vity-robolectric";
+    //private static String TAG = "stopwatch-android-act1vity-robolectric";
 
-    private StopwatchAdapter activity;
+    //private StopwatchAdapter activity;
 
-    @Before
-    public void setUp() {
-        activity = Robolectric.buildActivity(StopwatchAdapter.class).create().start().visible().get();
-    }
+    //@Before
+    //public void setUp() {
+        //activity = Robolectric.buildActivity(StopwatchAdapter.class).create().start().visible().get();
+    //}
 
-    @Override
-    protected StopwatchAdapter getActivity() {
-        return activity;
-    }
+    //@Override
+    //protected StopwatchAdapter getActivity() {
+        //return activity;
+   //}
 
-    @Override
-    protected void runUiThreadTasks() {
+    //@Override
+    //protected void runUiThreadTasks() {
         // Robolectric requires us to run the scheduled tasks explicitly!
-        Robolectric.runUiThreadTasks();
-    }
-}
+        //Robolectric.runUiThreadTasks();
+    //}
+//}

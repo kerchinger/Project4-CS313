@@ -10,7 +10,7 @@ import edu.luc.etl.cs313.android.simplestopwatch.model.time.TimeModel;
 
 public class RingingState extends TimerState{
 
-    public RingingState(TimerStateMachine sm) {
+    public RingingState(TimerState sm) {
         super(sm);
     }
 
@@ -20,11 +20,15 @@ public class RingingState extends TimerState{
     }
 
     private final TimerState RINGING = new TimerState(this){
-        @Override public void onEntry() {uiUpdateListener.ringAlarm(true); }
-        @Override public void onExit() {uiUpdateListener.ringAlarm(false); }
-        @Override public void onButtonPress() {setState(STOPPED); }
+        @Override public void onEntry() {
+            //uiUpdateListener.ringAlarm(true);
+        }
+        @Override public void onExit() {
+            //uiUpdateListener.ringAlarm(false);
+        }
+        @Override public void onButtonPress() {
+            //setState(STOPPED);
+        }
         @Override public int getID() {return R.string.RINGING; }
     };
-
-
 }

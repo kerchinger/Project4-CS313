@@ -55,17 +55,19 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
 
 
    //known states
-    private final TimerState STOPPED = new StoppedState(this);
-    private final TimerState RUNNING = new RunningState(this);
-    private final TimerState RINGING = new RingingState(this);
+    //private final TimerState STOPPED = new StoppedState(this);
+    //private final TimerState RUNNING = new RunningState(this);
+    //private final TimerState RINGING = new RingingState(this);
 
     //transitions
-    @Override public void toRunningState() {setState(RUNNING);}
-    @Override public void toStoppedState() {setState(STOPPED);}
-    @Override public void toRingingState() {setState(RINGING);}
+    //@Override public void toRunningState() {setState(RUNNING);}
+    //@Override public void toStoppedState() {setState(STOPPED);}
+    //@Override public void toRingingState() {setState(RINGING);}
 
     //actions
-    @Override public void actionInit() {toStoppedState();; actionReset();}
+    @Override public void actionInit() {
+        //toStoppedState();; actionReset();
+    }
     @Override public void actionReset(){timeModel.reset();actionUpdateView();}
     @Override public void actionStart() {clockModel.startTick(0);}
     @Override public void actionStop() {clockModel.stopTick();}
