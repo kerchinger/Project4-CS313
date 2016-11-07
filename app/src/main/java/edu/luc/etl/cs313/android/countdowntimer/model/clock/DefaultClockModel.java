@@ -38,7 +38,7 @@ public class DefaultClockModel implements ClockModel {
 
     @Override
     public void stopTick() {
-    timer.cancel();
+    recurring.cancel();
     }
 
     @Override

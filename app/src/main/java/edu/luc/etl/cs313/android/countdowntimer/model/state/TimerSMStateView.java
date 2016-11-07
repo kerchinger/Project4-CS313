@@ -14,12 +14,12 @@ interface TimerSMStateView {
 
     // actions
     void actionInit();
-    //void actionReset();
-    //void actionStart();
-    //void actionStop();
-    //void actionInc();
-    //void actionDec();
-    //void actionUpdateView();
+    void actionReset();
+    void actionStart();
+    void actionStop();
+    void actionInc();
+    void actionDec();
+    void actionUpdateView();
 
     // state-dependent UI updates
     void updateUIRuntime();

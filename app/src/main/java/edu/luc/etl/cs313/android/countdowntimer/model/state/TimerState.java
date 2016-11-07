@@ -1,5 +1,6 @@
 package edu.luc.etl.cs313.android.countdowntimer.model.state;
 
+import edu.luc.etl.cs313.android.countdowntimer.common.TimerUIUpdateListener;
 import edu.luc.etl.cs313.android.countdowntimer.model.clock.ClockListener;
 import edu.luc.etl.cs313.android.countdowntimer.common.TimerUIListener;
 
@@ -8,9 +9,11 @@ import edu.luc.etl.cs313.android.countdowntimer.common.TimerUIListener;
  */
 
 abstract class TimerState implements TimerUIListener, ClockListener{
-    public TimerState(final TimerSMStateView sm) {this.sm = sm;}
+     TimerState(final TimerSMStateView sm) {
+         this.sm = sm;}
 
     protected final TimerSMStateView sm;
+
 
     @Override
     public void onStart() {}
@@ -20,5 +23,9 @@ abstract class TimerState implements TimerUIListener, ClockListener{
     public void onTick() {}
     public void onTimeout() {}
     public abstract int getID();
+
+
+    public void updateView() {  // these is the only spot this makes sense
+    }
 }
 

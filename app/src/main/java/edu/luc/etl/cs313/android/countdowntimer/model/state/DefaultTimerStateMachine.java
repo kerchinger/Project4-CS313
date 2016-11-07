@@ -17,26 +17,29 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     private final TimeModel timeModel;
     private final  ClockModel clockModel;
 
-    private TimerState state;
+    //private TimerState state;
 
-    protected void setState(TimerState state) {
-        //takes previous state out and sets new state
-        if(this.state != null) {
-            this.state.onExit();
+    private TimerState state = new TimerState(this) {
+        @Override
+        public int getID() {
+            throw new IllegalStateException();
         }
-        this.state = state;
+    };
+
+    protected void setState(final TimerState nextState) {
+        //takes previous state out and sets new state
+        state.onExit();
+        state = nextState;
         uiUpdateListener.updateState(state.getID());
         state.onEntry();
     }
 
-    // TODO CHANge
     public TimerUIUpdateListener uiUpdateListener;
 
         @Override
         public void setUIUpdateListener(final TimerUIUpdateListener uiUpdateListener) {
             this.uiUpdateListener = uiUpdateListener;
         }
-   //end of change
 
 
     @Override
@@ -46,8 +49,13 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
 
     //UI thread or the timer thread
     @Override public  synchronized void onButtonPress() { state.onButtonPress(); }
+
+
+
+
     @Override public  synchronized void onTick() { state.onTick(); }
     @Override public  synchronized void onTimeout() { state.onTimeout(); }
+
 
     @Override public void updateUIRuntime() { uiUpdateListener.updateTime(timeModel.get()); }
 
@@ -63,11 +71,11 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
 
     //actions
     @Override public void actionInit() { toStoppedState(); }
-    //@Override public void actionReset(){timeModel.reset();actionUpdateView();}
-    //@Override public void actionStart() {clockModel.startTick(0);}
-    //@Override public void actionStop() {clockModel.stopTick();}
-    //@Override public void actionInc(){ timeModel.inc(); actionUpdateView(); } // THERE MAY BE AN ActionDec() idk actually i think there is also an INC
-    //@Override public void actionDec(){ timeModel.dec(); actionUpdateView(); }
-    //@Override public void actionUpdateView() { state.updateView(); }
+    @Override public void actionReset(){timeModel.reset();actionUpdateView();}
+    @Override public void actionStart() {clockModel.startTick(0);}
+    @Override public void actionStop() {clockModel.stopTick();}
+    @Override public void actionInc(){ timeModel.inc(); actionUpdateView(); }
+    @Override public void actionDec(){ timeModel.dec(); actionUpdateView(); }
+    @Override public void actionUpdateView() { state.updateView(); }
 
 }
