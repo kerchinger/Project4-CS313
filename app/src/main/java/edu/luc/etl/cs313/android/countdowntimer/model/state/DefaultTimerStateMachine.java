@@ -56,7 +56,7 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
 
     @Override public void updateUISeconds() { uiUpdateListener.updateTime(counter.get()); } // I am pretty sure these two are the same thing
     @Override
-    public void updateUIRuntime() {uiUpdateListener.updateTime(counter.get());}
+    public void updateUIRuntime() {uiUpdateListener.updateTime(timeModel.get());}
 
 
    //known states
@@ -74,7 +74,7 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     private final TimerState RUNNING = new TimerState(this) {
 
          @Override public void onEntry() {
-             clockModel.startTick(1); }
+             clockModel.startTick(1);}
          @Override public void onExit() {clockModel.stopTick(); }
         @Override public void onButtonPress() {
              setState(STOPPED); }

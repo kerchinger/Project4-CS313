@@ -44,13 +44,14 @@ public class DefaultClockModel implements ClockModel {
     // one-shot timer
     @Override
     public void restartTimeout(int i) { // restarts from the time i
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                timer.cancel(); // cancels timer
-            }
-        }, i * 1000);
-    }
+        long endtime = System.currentTimeMillis();
+
+
+        long differencce = ((endtime + (i * 1000))- endtime);
+        if(differencce >= 0){
+        listener.onTimeout(); // this is in the right spot
+        }
+
+        }
 
 }
