@@ -7,7 +7,7 @@ import edu.luc.etl.cs313.android.countdowntimer.model.time.TimeModel;
 public class RunningState extends TimerState {
 
    public RunningState(TimerSMStateView sm) {
-        super(sm);
+        super((TimerStateMachine) sm);
     }
 
     //ClockModel clockModel;

@@ -41,10 +41,16 @@ public class DefaultClockModel implements ClockModel {
     recurring.cancel();
     }
 
+    // one-shot timer
     @Override
     public void restartTimeout(int i) { // restarts from the time i
-        //TODO Implement THIS
-
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                timer.cancel(); // cancels timer
+            }
+        }, i * 1000);
     }
 
 }

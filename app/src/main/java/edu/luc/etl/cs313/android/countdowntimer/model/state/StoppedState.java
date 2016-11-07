@@ -5,9 +5,10 @@ import edu.luc.etl.cs313.android.countdowntimer.model.clock.ClockModel;
 import edu.luc.etl.cs313.android.countdowntimer.model.time.TimeModel;
 
 public class StoppedState extends TimerState {
+    //ClockModel clockModel;
 
     public StoppedState(TimerSMStateView sm) {
-        super(sm);
+        super((TimerStateMachine) sm);
     }
 
     @Override

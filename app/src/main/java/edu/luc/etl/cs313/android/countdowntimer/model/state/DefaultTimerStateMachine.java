@@ -1,5 +1,6 @@
 package edu.luc.etl.cs313.android.countdowntimer.model.state;
 
+import edu.luc.etl.cs313.android.countdowntimer.R;
 import edu.luc.etl.cs313.android.countdowntimer.model.clock.BoundedCounter;
 import edu.luc.etl.cs313.android.countdowntimer.model.clock.ClockModel;
 import edu.luc.etl.cs313.android.countdowntimer.model.time.TimeModel;
@@ -53,12 +54,54 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     @Override public  synchronized void onTick() { state.onTick(); }
     @Override public  synchronized void onTimeout() { state.onTimeout(); }
 
-    @Override public void updateUISeconds() { uiUpdateListener.updateTime(counter.get()); }
+    @Override public void updateUISeconds() { uiUpdateListener.updateTime(counter.get()); } // I am pretty sure these two are the same thing
+    @Override
+    public void updateUIRuntime() {uiUpdateListener.updateTime(counter.get());}
+
 
    //known states
-    private final TimerState STOPPED = new StoppedState(this);
-    private final TimerState RUNNING = new RunningState(this);
-    private final TimerState RINGING = new RingingState(this);
+
+    private final TimerState STOPPED = new TimerState(this) {
+        @Override public void onEntry()       { timeModel.reset(); updateUIRuntime(); }
+        @Override public void onButtonPress() {
+            clockModel.restartTimeout(3 /* seconds */);
+            timeModel.inc(); updateUIRuntime();
+        }
+        @Override public void onTimeout()     { setState(RUNNING); }
+        @Override public int  getID()         { return R.string.STOPPED; }
+    };
+
+    private final TimerState RUNNING = new TimerState(this) {
+
+         @Override public void onEntry() {
+             clockModel.startTick(1); }
+         @Override public void onExit() {clockModel.stopTick(); }
+        @Override public void onButtonPress() {
+             setState(STOPPED); }
+         @Override public void onTick() {
+             timeModel.dec();
+             updateUIRuntime();
+             if(timeModel.get() == 0) {
+                 setState(RINGING);
+            }
+         }
+
+         @Override public int getID() {return R.string.RUNNING; }
+     };
+
+
+    private final TimerState RINGING = new TimerState( this){
+        @Override public void onEntry() {
+            uiUpdateListener.ringAlarm(true);
+        }
+        @Override public void onExit() {
+            uiUpdateListener.ringAlarm(false);
+        }
+        @Override public void onButtonPress() {
+           setState(STOPPED);
+        }
+        @Override public int getID() {return R.string.RINGING; }
+    };
 
     //transitions
     @Override public void toRunningState() {setState(RUNNING);}

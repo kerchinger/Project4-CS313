@@ -9,7 +9,7 @@ import edu.luc.etl.cs313.android.countdowntimer.R;
 public class RingingState extends TimerState {
 
     public RingingState(TimerSMStateView sm) {
-        super(sm);
+        super((TimerStateMachine) sm);
     }
     
     //private final TimerState RINGING = new TimerState((TimerSMStateView) this){
