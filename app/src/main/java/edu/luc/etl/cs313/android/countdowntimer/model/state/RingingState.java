@@ -12,7 +12,7 @@ public class RingingState extends TimerState {
         super(sm);
     }
     
- /*  private final TimerState RINGING = new TimerState(this){
+    private final TimerState RINGING = new TimerState((TimerSMStateView) this){
         @Override public void onEntry() {
             //uiUpdateListener.ringAlarm(true);
         }
@@ -24,7 +24,7 @@ public class RingingState extends TimerState {
         }
         @Override public int getID() {return R.string.RINGING; }
     };
-*/
+
     @Override
     public int getID() { return R.string.RINGING; }
 

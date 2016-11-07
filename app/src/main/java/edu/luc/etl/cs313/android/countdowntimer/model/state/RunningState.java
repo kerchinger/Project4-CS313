@@ -16,21 +16,24 @@ public class RunningState extends TimerState {
     TimerState RINGING;
 
 
-    private final TimerState RUNNING = new TimerState(this) {
+    private final TimerState RUNNING = new TimerState((TimerSMStateView) this) {
 
         @Override public void onEntry() {
             clockModel.startTick(1); }
         @Override public void onExit() {clockModel.stopTick(); }
         @Override public void onButtonPress() {
-            setState(STOPPED);
+            sm.toStoppedState(); // THIS MAY WORK
+            //setState(STOPPED);
         }
 
 
         @Override public void onTick() {
             timeModel.dec();
-            updateUIRuntime();
+            sm.updateUIRuntime(); // THIS MAY WORK
+            //updateUIRuntime(;
             if(timeModel.get() == 0) {
-                setState(RINGING);
+                sm.toRingingState(); // THIS MAY WORK
+                //setState(RINGING);
             }
         }
 
