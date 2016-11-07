@@ -108,7 +108,7 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
         if (mediaPlayer.isPlaying()) { // basically like b being false, we don't need it because every time we enter the method the mediaplayer will stop. and then start if b is true
             mediaPlayer.stop();
         } else if (b == true){
-
+            mediaPlayer.reset();
             final Context context = getApplicationContext();
 
 

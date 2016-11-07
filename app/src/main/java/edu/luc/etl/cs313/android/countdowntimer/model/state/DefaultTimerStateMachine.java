@@ -72,7 +72,6 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     };
 
     private final TimerState RUNNING = new TimerState(this) {
-
          @Override public void onEntry() {
              clockModel.startTick(1);}
          @Override public void onExit() {clockModel.stopTick(); }

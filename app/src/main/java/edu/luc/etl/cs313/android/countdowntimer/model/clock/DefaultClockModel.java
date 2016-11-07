@@ -24,8 +24,8 @@ public class DefaultClockModel implements ClockModel {
 
     @Override
     public void startTick(final int periodInSec) {
-        if(recurring != null) throw new IllegalStateException();
-
+       // if(recurring != null) throw new IllegalStateException();
+        if (recurring != null) {recurring.cancel();}
         recurring = new Timer();
 
         recurring.schedule(new TimerTask(){
