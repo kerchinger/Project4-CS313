@@ -95,7 +95,7 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
             uiUpdateListener.ringAlarm(true);
         }
         @Override public void onExit() {
-            uiUpdateListener.ringAlarm(false);
+            uiUpdateListener.ringAlarm(false); // and here
         }
         @Override public void onButtonPress() {
            setState(STOPPED);

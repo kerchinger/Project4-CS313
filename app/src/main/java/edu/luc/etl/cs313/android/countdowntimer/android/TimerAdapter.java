@@ -13,6 +13,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.content.Context; // here for all of the MediaPlayer imports
+import java.lang.Object;
 
 import edu.luc.etl.cs313.android.countdowntimer.R;
 import edu.luc.etl.cs313.android.countdowntimer.common.TimerUIUpdateListener;
@@ -100,42 +101,45 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
         });
     }
 
+    MediaPlayer mediaPlayer = new MediaPlayer();
+
     @Override
     public void ringAlarm(boolean b) {
-        // TODO CHECK THIS, I thought that maybe the alarm should be puter
-        //here as a because it takes in a true and a false but idk
-        Uri defaultRingtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        if (mediaPlayer.isPlaying()) { // basically like b being false, we don't need it because every time we enter the method the mediaplayer will stop. and then start if b is true
+            mediaPlayer.stop();
+        } else if (b == true){
 
-        MediaPlayer mediaPlayer = new MediaPlayer();
-        Context context = null;
+            final Context context = getApplicationContext();
 
-        try {
-            mediaPlayer.setDataSource(context, defaultRingtoneUri);
-            mediaPlayer.setAudioStreamType(AudioManager.STREAM_NOTIFICATION);
-            mediaPlayer.prepare();
-            mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    mp.release();
-                }
-            });
 
-            if (b == true) {
+            //Uri defaultRingtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Uri defaultRingtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+
+            try {
+                mediaPlayer.setDataSource(context, defaultRingtoneUri);
+                mediaPlayer.setAudioStreamType(AudioManager.STREAM_NOTIFICATION);
+                //mediaPlayer.setAudioStreamType(AudioManager.STREAM_RING);
+                mediaPlayer.prepare();
+                mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
+
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.release();
+                    }
+                });
                 mediaPlayer.start();
-            } else {
-                mediaPlayer.stop();
+
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            } catch (SecurityException e) {
+                e.printStackTrace();
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-
     }
 
     // forward event listener methods to the model

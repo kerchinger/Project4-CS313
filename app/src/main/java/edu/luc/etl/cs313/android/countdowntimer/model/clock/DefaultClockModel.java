@@ -43,14 +43,19 @@ public class DefaultClockModel implements ClockModel {
 
     // one-shot timer
     @Override
-    public void restartTimeout(int i) { // restarts from the time i
-        long endtime = System.currentTimeMillis();
-
-
-        long differencce = ((endtime + (i * 1000))- endtime);
-        if(differencce >= 0){
-        listener.onTimeout(); // this is in the right spot
+    public void restartTimeout(int i) { // it checks to see if timer is null, if it is not it cancels out the timer. and then creates a new timer, that will schedule a task after a 3 second delay
+        if(timer != null) {
+            timer.cancel();
         }
+
+        timer = new Timer();
+
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                listener.onTimeout();
+            }
+        }, i *1000);
 
         }
 
