@@ -28,8 +28,8 @@
         android:id="@+id/timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/state"
-        android:layout_centerHorizontal="true" >
+        android:layout_below="@+id/state"
+        android:layout_centerHorizontal="true">
 
         <TextView
             android:id="@+id/seconds"
@@ -52,7 +52,7 @@
             android:id="@+id/startStop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onButtonClick"
+            android:onClick="onButtonPress"
             android:text="@string/button" />
 
     </RelativeLayout>

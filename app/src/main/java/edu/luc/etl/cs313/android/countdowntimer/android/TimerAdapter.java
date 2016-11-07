@@ -139,9 +139,7 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
     }
 
     // forward event listener methods to the model
-    public void onButtonClick(final View view) {
-        model.onStart();
-    } // this in some sense is the button!!! so we might want to change this for a better understanding
-
-
+    public void onButtonPress(final View view) {
+        model.onButtonPress();
+    }
 }

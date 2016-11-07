@@ -10,26 +10,17 @@ public class StoppedState extends TimerState {
         super(sm);
     }
 
+    @Override
+    public void onButtonPress() {
+        //clockModel.restartTimeout(3);
+        sm.increment();
+        sm.updateUISeconds();
+    }
 
-    ClockModel clockModel;
-    TimeModel timeModel;
-
-
-
-   /private final TimerState STOPPED = new TimerState((TimerSMStateView) this) {
-        @Override public void onEntry() {
-            timeModel.reset(); updateUIRuntime();
-        }
-        @Override public void onButtonPress() {
-            clockModel.restartTimeout(3);
-            timeModel.inc(); updateUIRuntime();
-       }
-        @Override public void onTimeout() {
-            setState(RUNNING);
-        }
-
-        @Override public int getID() {return R.string.STOPPED; }
-    };
+    @Override
+    public void onTimeout() {
+        sm.toRunningState();
+    }
 
     @Override
     public int getID() {

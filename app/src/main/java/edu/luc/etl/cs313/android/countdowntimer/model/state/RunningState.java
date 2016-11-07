@@ -10,36 +10,35 @@ public class RunningState extends TimerState {
         super(sm);
     }
 
-    ClockModel clockModel;
-    TimeModel timeModel;
-    TimerState STOPPED;
-    TimerState RINGING;
+    //ClockModel clockModel;
+    //TimeModel timeModel;
+    //TimerState STOPPED;
+    //TimerState RINGING;
 
-
-    private final TimerState RUNNING = new TimerState((TimerSMStateView) this) {
-
-        @Override public void onEntry() {
-            clockModel.startTick(1); }
-        @Override public void onExit() {clockModel.stopTick(); }
-        @Override public void onButtonPress() {
-            sm.toStoppedState(); // THIS MAY WORK
-            //setState(STOPPED);
-        }
-
-
-        @Override public void onTick() {
-            timeModel.dec();
-            sm.updateUIRuntime(); // THIS MAY WORK
-            //updateUIRuntime(;
-            if(timeModel.get() == 0) {
-                sm.toRingingState(); // THIS MAY WORK
-                //setState(RINGING);
-            }
-        }
-
-        @Override public int getID() {return R.string.RUNNING; }
-
-    };
+   // private final TimerState RUNNING = new TimerState((TimerSMStateView) this) {
+//
+   //     @Override public void onEntry() {
+   //         clockModel.startTick(1); }
+   //     @Override public void onExit() {clockModel.stopTick(); }
+   //     @Override public void onButtonPress() {
+   //         sm.toStoppedState(); // THIS MAY WORK
+   //         //setState(STOPPED);
+   //     }
+//
+//
+   //     @Override public void onTick() {
+   //         timeModel.dec();
+   //         sm.updateUIRuntime(); // THIS MAY WORK
+   //         //updateUIRuntime(;
+   //         if(timeModel.get() == 0) {
+   //             sm.toRingingState(); // THIS MAY WORK
+   //             //setState(RINGING);
+   //         }
+   //     }
+//
+   //     @Override public int getID() {return R.string.RUNNING; }
+//
+   // };
 
 
     @Override
