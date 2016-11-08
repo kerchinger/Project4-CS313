@@ -54,9 +54,9 @@ public class DefaultClockModel implements ClockModel {
             @Override
             public void run() {
                 listener.onTimeout();
+
             }
         }, i *1000);
 
         }
-
 }

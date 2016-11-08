@@ -11,5 +11,6 @@ public interface TimerUIUpdateListener {
     void updateTime(int timeValue);
     void updateState(int stateId);
     void updateButton(int buttonId);
-    void ringAlarm(boolean b); // TODO add this
+    void ringAlarm(boolean b);
+    void ringNotification();
 }

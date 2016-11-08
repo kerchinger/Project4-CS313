@@ -25,6 +25,7 @@ public abstract class AbstractStopwatchActivityTest {
 
     private static final long STOPPED = Long.parseLong(null); // also don;t know how correct these two are
     private static final long RUNNING = Long.parseLong(null);
+    private static final long RINNGING = Long.parseLong(null);
 
 
     /**

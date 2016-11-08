@@ -141,6 +141,39 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
         });
     }
 
+    public void ringNotification(){  // this is a one-shot ring for when the restartTimout reaches 3 seconds it ring a notification
+        runOnUiThread(() -> {
+
+            MediaPlayer mediaPlayer1 = new MediaPlayer(); // since it is only a one shot timer and isn;t continually ringing we can create a new mediaplayer every time
+
+            final Context context1 = getApplicationContext();
+
+            Uri defaultRingtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+            try {
+                mediaPlayer1.setDataSource(context1, defaultRingtoneUri);
+                mediaPlayer1.setAudioStreamType(AudioManager.STREAM_NOTIFICATION);
+                mediaPlayer1.prepare();
+                mediaPlayer1.setOnCompletionListener(new OnCompletionListener() {
+
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.release();
+                    }
+                });
+                mediaPlayer1.start();
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            } catch (SecurityException e) {
+                e.printStackTrace();
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+     });
+
+    }
     // forward event listener methods to the model
     public void onButtonPress(final View view) {
         model.onButtonPress();

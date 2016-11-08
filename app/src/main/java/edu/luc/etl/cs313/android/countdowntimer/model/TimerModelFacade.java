@@ -10,6 +10,3 @@ import edu.luc.etl.cs313.android.countdowntimer.common.TimerUIUpdateSource;
 public interface TimerModelFacade extends  TimerUIListener, TimerUIUpdateSource{
     void onStart();
 }
-/*public interface StopwatchModelFacade extends TimerUIListener, TimerUIUpdateSource {
-    void onStart();
-}*/

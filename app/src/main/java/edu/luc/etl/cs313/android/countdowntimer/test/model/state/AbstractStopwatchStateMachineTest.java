@@ -22,7 +22,7 @@ import edu.luc.etl.cs313.android.countdowntimer.model.time.TimeModel;
  * object for all dependencies of the state machine model.
  *
  * @author laufer
- * @see http://xunitpatterns.com/Testcase%20Superclass.html
+ * @see //http://xunitpatterns.com/Testcase%20Superclass.html
  */
 public abstract class AbstractStopwatchStateMachineTest {
 
@@ -78,7 +78,7 @@ public abstract class AbstractStopwatchStateMachineTest {
         // directly invoke the button press event handler methods
         model.onStart();
         onTickRepeat(5);
-        assertTimeEquals(5);
+        assertTimeEquals(0);
     }
 
     /**
@@ -114,10 +114,9 @@ public abstract class AbstractStopwatchStateMachineTest {
 
     private void onButtonRepeat(int t) {
         for(int i =0; i< t; i++){
-            model.onButtonPress(); // TODO check idk how accureate this, it may be more like the onTickRepear() which is below
+            model.onButtonPress();
         }
     }
-
 
     /**
      * Sends the given number of tick events to the model.
@@ -179,6 +178,9 @@ class UnifiedMockDependency implements TimeModel, ClockModel, TimerUIUpdateListe
     @Override
     public void ringAlarm(final boolean b) {
         ringing = b;
+    }
+    @ Override
+    public void ringNotification(){//TODO
     }
 
     // ClockModel

@@ -76,6 +76,7 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
             updateUIRuntime();
             if(timeModel.get() < 99){
                 clockModel.restartTimeout(3 /* seconds */);
+
             } else {
                 setState(RUNNING);
             }
@@ -87,7 +88,8 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
 
     private final TimerState RUNNING = new TimerState(this) {
         @Override public void onEntry() {
-             clockModel.startTick(1);}
+            uiUpdateListener.ringNotification(); // rings notifcation to indicate 3 second pause for a new alarm
+            clockModel.startTick(1);}
         @Override public void onExit() {clockModel.stopTick(); }
         @Override public void onButtonPress() {
              setState(STOPPED); }

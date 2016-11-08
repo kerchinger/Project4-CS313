@@ -12,13 +12,13 @@ import edu.luc.etl.cs313.android.countdowntimer.test.android.AbstractStopwatchAc
  * device.
  *
  * @author laufer
- * @see http://developer.android.com/tools/testing/activity_testing.html
+ * @see //http://developer.android.com/tools/testing/activity_testing.html
  */
 public class StopwatchActivityTest extends ActivityInstrumentationTestCase2<TimerAdapter> {
 
     /**
      * Creates an {@link ActivityInstrumentationTestCase2} for the
-     * {@link SkeletonActivity} activity.
+     * {@link //SkeletonActivity} activity.
      */
     public StopwatchActivityTest() {
         super(TimerAdapter.class);
