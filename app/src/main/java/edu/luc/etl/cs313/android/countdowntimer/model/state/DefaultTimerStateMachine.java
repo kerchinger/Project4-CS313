@@ -65,10 +65,20 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
    //known states
 
     private final TimerState STOPPED = new TimerState(this) {
-        @Override public void onEntry()       { timeModel.reset(); updateUIRuntime(); }
+        @Override public void onEntry() {
+            timeModel.reset();
+            updateUIRuntime();
+        }
+
+        //this will set the boundary from 0 to 99
         @Override public void onButtonPress() {
-            clockModel.restartTimeout(3 /* seconds */);
-            timeModel.inc(); updateUIRuntime();
+            timeModel.inc();
+            updateUIRuntime();
+            if(timeModel.get() < 99){
+                clockModel.restartTimeout(3 /* seconds */);
+            } else {
+                setState(RUNNING);
+            }
         }
         @Override public void onTimeout()     { setState(RUNNING); }
         @Override public int  getID()         { return R.string.STOPPED; }
@@ -93,7 +103,7 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
      };
 
 
-    private final TimerState RINGING = new TimerState( this){
+    private final TimerState RINGING = new TimerState(this){
         @Override public void onEntry() {
             uiUpdateListener.ringAlarm(true);
         }
