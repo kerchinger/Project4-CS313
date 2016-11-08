@@ -127,7 +127,7 @@ public abstract class AbstractStopwatchActivityTest {
     }
 
     protected Button getButton() {
-        return (Button) getActivity().findViewById(R.id.startStop);
+        return (Button) getActivity().findViewById(R.id.counterButton);
     }
 
 

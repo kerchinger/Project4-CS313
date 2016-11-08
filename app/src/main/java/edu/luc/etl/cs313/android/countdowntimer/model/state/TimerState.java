@@ -27,11 +27,10 @@ abstract class TimerState implements TimerUIListener, ClockListener{
     public void onTick() {}
     public void onTimeout() {}
     public abstract int getID();
-
+    public abstract int getButtonID();
 
     public void updateView() {  // these is the only spot this makes sense
     }
-
 
 }
 

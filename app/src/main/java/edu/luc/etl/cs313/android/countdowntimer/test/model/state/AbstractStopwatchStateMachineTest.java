@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.luc.etl.cs313.android.countdowntimer.R;
-import edu.luc.etl.cs313.android.countdowntimer.model.clock.BoundedCounter;
 import edu.luc.etl.cs313.android.countdowntimer.model.clock.ClockListener;
 import edu.luc.etl.cs313.android.countdowntimer.common.TimerUIUpdateListener;
 import edu.luc.etl.cs313.android.countdowntimer.model.clock.ClockModel;
@@ -146,7 +145,7 @@ public abstract class AbstractStopwatchStateMachineTest {
  *
  * @author laufer
  */
-class UnifiedMockDependency implements TimeModel, ClockModel, TimerUIUpdateListener, BoundedCounter {
+class UnifiedMockDependency implements TimeModel, ClockModel, TimerUIUpdateListener {
 
     private int timeValue = -1, stateId = -1;
 
@@ -221,24 +220,7 @@ class UnifiedMockDependency implements TimeModel, ClockModel, TimerUIUpdateListe
         return runningTime;
     }
 
-    @Override public void increment() {
+    @Override public void updateButton(int buttonId) {
 
     }
-
-    @Override public void decrement() {
-
-    }
-
-    //@Override public int get() {
-    //    return 0;
-    //}
-
-    @Override public boolean isFull() {
-        return false;
-    }
-
-    @Override public boolean isEmpty() {
-        return false;
-    }
-
 }

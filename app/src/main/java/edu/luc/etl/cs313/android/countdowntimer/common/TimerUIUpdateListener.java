@@ -10,6 +10,6 @@ package edu.luc.etl.cs313.android.countdowntimer.common;
 public interface TimerUIUpdateListener {
     void updateTime(int timeValue);
     void updateState(int stateId);
-
+    void updateButton(int buttonId);
     void ringAlarm(boolean b); // TODO add this
 }

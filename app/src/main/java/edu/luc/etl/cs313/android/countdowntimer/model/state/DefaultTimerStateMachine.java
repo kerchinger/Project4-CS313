@@ -1,7 +1,6 @@
 package edu.luc.etl.cs313.android.countdowntimer.model.state;
 
 import edu.luc.etl.cs313.android.countdowntimer.R;
-import edu.luc.etl.cs313.android.countdowntimer.model.clock.BoundedCounter;
 import edu.luc.etl.cs313.android.countdowntimer.model.clock.ClockModel;
 import edu.luc.etl.cs313.android.countdowntimer.model.time.TimeModel;
 import edu.luc.etl.cs313.android.countdowntimer.common.TimerUIUpdateListener;
@@ -11,19 +10,22 @@ import edu.luc.etl.cs313.android.countdowntimer.common.TimerUIUpdateListener;
  */
 
 public class DefaultTimerStateMachine implements TimerStateMachine {
-    public DefaultTimerStateMachine(TimeModel timeModel, ClockModel clockModel, BoundedCounter counter){
+    public DefaultTimerStateMachine(TimeModel timeModel, ClockModel clockModel){
         this.clockModel = clockModel;
         this.timeModel = timeModel;
-        this.counter = counter;
     }
 
     private final TimeModel timeModel;
     private final ClockModel clockModel;
-    private final BoundedCounter counter;
 
     private TimerState state = new TimerState(this) {
         @Override
         public int getID() {
+            throw new IllegalStateException();
+        }
+
+        @Override
+        public int getButtonID() {
             throw new IllegalStateException();
         }
     };
@@ -33,6 +35,7 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
         state.onExit();
         state = nextState;
         uiUpdateListener.updateState(state.getID());
+        uiUpdateListener.updateButton(state.getButtonID());
         state.onEntry();
     }
 
@@ -54,7 +57,7 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     @Override public  synchronized void onTick() { state.onTick(); }
     @Override public  synchronized void onTimeout() { state.onTimeout(); }
 
-    @Override public void updateUISeconds() { uiUpdateListener.updateTime(counter.get()); } // I am pretty sure these two are the same thing
+    @Override public void updateUISeconds() { uiUpdateListener.updateTime(timeModel.get()); } // I am pretty sure these two are the same thing
     @Override
     public void updateUIRuntime() {uiUpdateListener.updateTime(timeModel.get());}
 
@@ -69,23 +72,24 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
         }
         @Override public void onTimeout()     { setState(RUNNING); }
         @Override public int  getID()         { return R.string.STOPPED; }
+        @Override public int getButtonID() {return R.string.BUTTONIDSTOPPED;}
     };
 
     private final TimerState RUNNING = new TimerState(this) {
-         @Override public void onEntry() {
+        @Override public void onEntry() {
              clockModel.startTick(1);}
-         @Override public void onExit() {clockModel.stopTick(); }
+        @Override public void onExit() {clockModel.stopTick(); }
         @Override public void onButtonPress() {
              setState(STOPPED); }
-         @Override public void onTick() {
+        @Override public void onTick() {
              timeModel.dec();
              updateUIRuntime();
              if(timeModel.get() == 0) {
                  setState(RINGING);
             }
-         }
-
-         @Override public int getID() {return R.string.RUNNING; }
+        }
+        @Override public int getID() {return R.string.RUNNING; }
+        @Override public int getButtonID() {return R.string.BUTTONIDRUNNING;}
      };
 
 
@@ -99,40 +103,12 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
         @Override public void onButtonPress() {
            setState(STOPPED);
         }
-        @Override public int getID() {return R.string.RINGING; }
+        @Override public int getID() { return R.string.RINGING; }
+        @Override public int getButtonID() { return R.string.BUTTONIDRINGING; }
     };
 
     //transitions
     @Override public void toRunningState() {setState(RUNNING);}
     @Override public void toStoppedState() {setState(STOPPED);}
     @Override public void toRingingState() {setState(RINGING);}
-
-    //actions
-    @Override public void increment() {
-        counter.increment();
-    }
-
-    @Override public void decrement() {
-        counter.decrement();
-    }
-
-    @Override public int get() {
-        return counter.get();
-    }
-
-    @Override public boolean isFull() {
-        return counter.isFull();
-    }
-
-    @Override public boolean isEmpty() {
-        return counter.isEmpty();
-    }
-    //@Override public void actionInit() { toStoppedState(); }
-    //@Override public void actionReset(){timeModel.reset();actionUpdateView();}
-    //@Override public void actionStart() {clockModel.startTick(0);}
-    //@Override public void actionStop() {clockModel.stopTick();}
-    //@Override public void actionInc(){ timeModel.inc(); actionUpdateView(); }
-    //@Override public void actionDec(){ timeModel.dec(); actionUpdateView(); }
-    //@Override public void actionUpdateView() { state.updateView(); }
-
 }

@@ -91,13 +91,10 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
         });
     }
 
-    // TODO: Question: Do we want the Button name to change??? If so we would have to implement that!!
-    // I believe it would look something like this:
-
-    public void updateButtonValue( final int ButtonID){
+    public void updateButton( final int buttonID){
         runOnUiThread(() -> {
-            final TextView stateName = (TextView) findViewById(R.id.startStop); // so you can;t see this in the app, as of right now, but its there
-            stateName.setText(getString(ButtonID));
+            final TextView stateName = (TextView) findViewById(R.id.counterButton); // so you can;t see this in the app, as of right now, but its there
+            stateName.setText(getString(buttonID));
         });
     }
 
