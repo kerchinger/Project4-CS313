@@ -21,7 +21,7 @@ import static edu.luc.etl.cs313.android.countdowntimer.common.Constants.SEC_PER_
  * TODO move this and the other tests to src/test once Android Studio supports
  * non-instrumentation unit tests properly.
  */
-public abstract class AbstractStopwatchActivityTest {
+public abstract class AbstractCountdownTimerActivityTest {
 
     private static final long STOPPED = Long.parseLong(null); // also don;t know how correct these two are
     private static final long RUNNING = Long.parseLong(null);

@@ -24,7 +24,7 @@ import edu.luc.etl.cs313.android.countdowntimer.model.time.TimeModel;
  * @author laufer
  * @see //http://xunitpatterns.com/Testcase%20Superclass.html
  */
-public abstract class AbstractStopwatchStateMachineTest {
+public abstract class AbstractCountdownTimerStateMachineTest {
 
     private static final int MAX_TIME = 99;// Max time should be 99 because that is as high as we can go
     private TimerStateMachine model;

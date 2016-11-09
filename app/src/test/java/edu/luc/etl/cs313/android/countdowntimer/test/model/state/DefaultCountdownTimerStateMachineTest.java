@@ -12,7 +12,7 @@ import edu.luc.etl.cs313.android.countdowntimer.model.state.DefaultTimerStateMac
  * @author laufer
  * @see http://xunitpatterns.com/Testcase%20Superclass.html
  */
-public class DefaultStopwatchStateMachineTest extends AbstractStopwatchStateMachineTest {
+public class DefaultCountdownTimerStateMachineTest extends AbstractCountdownTimerStateMachineTest {
 
     @Before
     public void setUp() throws Exception {

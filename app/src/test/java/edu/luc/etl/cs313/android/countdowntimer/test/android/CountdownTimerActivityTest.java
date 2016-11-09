@@ -1,8 +1,8 @@
-package edu.luc.etl.cs313.android.countdowntimer.android;
+package edu.luc.etl.cs313.android.countdowntimer.test.android;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-import edu.luc.etl.cs313.android.countdowntimer.test.android.AbstractStopwatchActivityTest;
+import edu.luc.etl.cs313.android.countdowntimer.android.TimerAdapter;
 
 
 /**
@@ -14,24 +14,24 @@ import edu.luc.etl.cs313.android.countdowntimer.test.android.AbstractStopwatchAc
  * @author laufer
  * @see //http://developer.android.com/tools/testing/activity_testing.html
  */
-public class StopwatchActivityTest extends ActivityInstrumentationTestCase2<TimerAdapter> {
+public class CountdownTimerActivityTest extends ActivityInstrumentationTestCase2<TimerAdapter> {
 
     /**
      * Creates an {@link ActivityInstrumentationTestCase2} for the
      * {@link //SkeletonActivity} activity.
      */
-    public StopwatchActivityTest() {
+    public CountdownTimerActivityTest() {
         super(TimerAdapter.class);
-        actualTest = new AbstractStopwatchActivityTest() {
+        actualTest = new AbstractCountdownTimerActivityTest() {
             @Override
             protected TimerAdapter getActivity() {
                 // return activity instance provided by instrumentation test
-                return StopwatchActivityTest.this.getActivity();
+                return CountdownTimerActivityTest.this.getActivity();
             }
         };
     }
 
-    private AbstractStopwatchActivityTest actualTest;
+    private AbstractCountdownTimerActivityTest actualTest;
 
     public void testActivityCheckTestCaseSetUpProperly() {
         actualTest.testActivityCheckTestCaseSetUpProperly();

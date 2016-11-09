@@ -53,13 +53,10 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
 
     //UI thread or the timer thread
     @Override public  synchronized void onButtonPress() { state.onButtonPress(); }
-
     @Override public  synchronized void onTick() { state.onTick(); }
     @Override public  synchronized void onTimeout() { state.onTimeout(); }
-
     @Override public void updateUISeconds() { uiUpdateListener.updateTime(timeModel.get()); } // I am pretty sure these two are the same thing
-    @Override
-    public void updateUIRuntime() {uiUpdateListener.updateTime(timeModel.get());}
+    @Override public void updateUIRuntime() {uiUpdateListener.updateTime(timeModel.get());}
 
 
    //known states
