@@ -1,4 +1,19 @@
 Pair development Journey:
-
+    We developed and worked on this project in separate locations but kept in touch with each other
+    through slack: discussing what we had done, problems we are having, solutions to problems, and
+    giving each other feedback on the work we had done. Through this constant feedback and discussion
+    we were able to work very well together on making design decisions, refactoring, and having a better
+    understanding of the code.
 
 Relationship between state machine model and actual code:
+    The similarities between the state model and the actual code is the functionality of program and
+    how each of the states are interacting with each other. Further, this translates into how similar
+    the structure of the two are in comparison to each other. Which in this case makes writing and
+    understanding the code a lot easier. The differences are in the details, specifically the code
+    is more complex and has more of the details vs the state machine model which displays the main
+    functional details that are important to running the program. In this case and in many others,
+    is is a lot more effective to model first, but there is a limitation to this. State modeling like
+    what we did proved to be very helpful. But when you get into modeling every single piece structure
+    in the program, this is ineffective. To conclude, we would not make an changes to the model because
+    it is simple and easy to understand the concept of the state model. In adding or deleting anything
+    would make the model too complex or too simple for use.

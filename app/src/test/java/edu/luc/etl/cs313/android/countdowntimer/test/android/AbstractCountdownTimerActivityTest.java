@@ -23,7 +23,7 @@ import static edu.luc.etl.cs313.android.countdowntimer.common.Constants.SEC_PER_
  */
 public abstract class AbstractCountdownTimerActivityTest {
 
-    private static final long STOPPED = R.string.STOPPED; // also don;t know how correct these two are
+    private static final long STOPPED = R.string.STOPPED;
     private static final long RUNNING = R.string.RUNNING;
     private static final long RINNGING = R.string.RINGING;
 

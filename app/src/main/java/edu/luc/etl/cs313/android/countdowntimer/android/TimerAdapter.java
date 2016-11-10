@@ -98,10 +98,10 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
         });
     }
 
-    MediaPlayer mediaPlayer = new MediaPlayer();
+    MediaPlayer mediaPlayer = new MediaPlayer(); // put outside because we call the mediaplayer twice to start and stop, so we can't make a new media player everytime we call method
 
     @Override
-    public void ringAlarm(boolean b) {
+    public void ringAlarm(boolean b) {  // repeated ring that rings like an alarm
         runOnUiThread(() -> {
             if (mediaPlayer.isPlaying()) { // basically like b being false, we don't need it because every time we enter the method the mediaplayer will stop. and then start if b is true
                 mediaPlayer.stop();
