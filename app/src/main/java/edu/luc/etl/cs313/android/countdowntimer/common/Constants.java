@@ -1,7 +1,7 @@
 package edu.luc.etl.cs313.android.countdowntimer.common;
 
 /**
- * Constants for the time calculations used by the stopwatch.
+ * Constants for the time calculations used by the countdownTimer.
  */
 public final class Constants {
 

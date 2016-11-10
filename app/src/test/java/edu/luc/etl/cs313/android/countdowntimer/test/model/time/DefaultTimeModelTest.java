@@ -22,4 +22,5 @@ public class DefaultTimeModelTest extends AbstractTimeModelTest {
     public void tearDown() throws Exception {
         setModel(null);
     }
+
 }
