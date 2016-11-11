@@ -22,6 +22,7 @@ import edu.luc.etl.cs313.android.countdowntimer.model.ConcreteTimerModelFacade;
 
 
 /**
+ *
  * Created by kyleerchinger on 11/1/16.
  */
 
@@ -61,7 +62,6 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
         model.onStart();
     }
 
-    // TODO remaining lifecycle methods
     /**
      * Updates the seconds and minutes in the UI.
      *
@@ -91,6 +91,10 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
         });
     }
 
+    /**
+     * Updates the button name in the UI.
+     * @param buttonID
+     */
     public void updateButton( final int buttonID){
         runOnUiThread(() -> {
             final TextView stateName = (TextView) findViewById(R.id.counterButton); // so you can;t see this in the app, as of right now, but its there

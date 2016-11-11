@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import android.content.res.Resources;
 import android.widget.Button;
 import android.widget.TextView;
 import edu.luc.etl.cs313.android.countdowntimer.R;
@@ -23,9 +24,9 @@ import static edu.luc.etl.cs313.android.countdowntimer.common.Constants.SEC_PER_
  */
 public abstract class AbstractCountdownTimerActivityTest {
 
-    private static final long STOPPED = R.string.STOPPED;
-    private static final long RUNNING = R.string.RUNNING;
-    private static final long RINNGING = R.string.RINGING;
+    private static final int STOPPED = R.string.STOPPED;
+    private static final int RUNNING = R.string.RUNNING;
+    private static final int RINNGING = R.string.RINGING;
 
 
     /**
@@ -55,7 +56,9 @@ public abstract class AbstractCountdownTimerActivityTest {
     public void testActivityScenarioRun() throws Throwable {
         getActivity().runOnUiThread(() -> {
             assertEquals(0, getDisplayedValue());
-            assertTrue(getButton().performClick());
+            for(int i = 0; i < 7; ++i){
+                assertTrue(getButton().performClick());
+            }
         });
         Thread.sleep(5500); // <-- do not run this in the UI thread!
         runUiThreadTasks();
@@ -119,12 +122,21 @@ public abstract class AbstractCountdownTimerActivityTest {
 
     protected int getDisplayedValue() {
         final TextView ts = (TextView) getActivity().findViewById(R.id.seconds);
-        return SEC_PER_MIN * tvToInt(ts);
+        return tvToInt(ts);
     }
 
-    protected String getStateValue(){
+    protected int getStateValue(){
         final TextView ts1 = (TextView) getActivity().findViewById(R.id.stateName);
-        return ts1.toString(); // I don't know how correct this is
+        String stateValue = ts1.getText().toString();
+        if(getActivity().getString(STOPPED) == stateValue){
+            return STOPPED;
+        } else if(getActivity().getString(RINNGING) == stateValue){
+            return RINNGING;
+        } else if(getActivity().getString(RUNNING) == stateValue){
+            return RUNNING;
+        } else {
+            return -1;
+        }
     }
 
     protected Button getButton() {
