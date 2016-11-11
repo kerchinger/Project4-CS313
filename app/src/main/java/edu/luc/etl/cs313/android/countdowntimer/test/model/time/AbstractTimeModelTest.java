@@ -33,7 +33,7 @@ public abstract class AbstractTimeModelTest {
     }
 
     /**
-     * Verifies that runtime and laptime are initially 0 or less.
+     * Verifies that runtime is initially 0 or less.
      */
     @Test
     public void testPreconditions() {

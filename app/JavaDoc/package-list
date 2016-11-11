@@ -1,0 +1,10 @@
+edu.luc.etl.cs313.android.countdowntimer.android
+edu.luc.etl.cs313.android.countdowntimer.common
+edu.luc.etl.cs313.android.countdowntimer.model
+edu.luc.etl.cs313.android.countdowntimer.model.clock
+edu.luc.etl.cs313.android.countdowntimer.model.state
+edu.luc.etl.cs313.android.countdowntimer.model.time
+edu.luc.etl.cs313.android.countdowntimer.test.android
+edu.luc.etl.cs313.android.countdowntimer.test.model.clock
+edu.luc.etl.cs313.android.countdowntimer.test.model.state
+edu.luc.etl.cs313.android.countdowntimer.test.model.time

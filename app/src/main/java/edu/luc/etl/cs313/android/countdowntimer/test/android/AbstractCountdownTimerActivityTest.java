@@ -15,12 +15,8 @@ import edu.luc.etl.cs313.android.countdowntimer.android.TimerAdapter;
 import static edu.luc.etl.cs313.android.countdowntimer.common.Constants.SEC_PER_MIN;
 
 /**
- * Abstract GUI-level test superclass of several essential stopwatch scenarios.
+ * Abstract GUI-level test superclass of several essential countdown timer scenarios.
  *
- * @author laufer
- *
- * TODO move this and the other tests to src/test once Android Studio supports
- * non-instrumentation unit tests properly.
  */
 public abstract class AbstractCountdownTimerActivityTest {
 
@@ -48,7 +44,7 @@ public abstract class AbstractCountdownTimerActivityTest {
     }
 
     /**
-     * Verifies the following scenario: time is 0, press start, wait 5+ seconds, expect time 5.
+     * Verifies the following scenario: time is 0, press button 7 times, wait 5+ seconds, expect time 5.
      *
      * @throws Throwable
      */
@@ -68,12 +64,10 @@ public abstract class AbstractCountdownTimerActivityTest {
         });
     }
 
-
-
     /**
-     * Verifies the following scenario: time is 0, press start, wait 5+ seconds,
-     * expect time 5, press lap, wait 4 seconds, expect time 5, press start,
-     * expect time 5, press lap, expect time 9, press lap, expect time 0.
+     * Verifies the following scenario: time is 0, press button 5 times,
+     * expect time 5, wait 3 seconds, expect RUNNING state, expect time 5, wait 3 seconds,
+     * expect RUNNING state, expect time 2, press button, expect STOPPED state.
      *
      * @throws Throwable
      */
@@ -84,7 +78,7 @@ public abstract class AbstractCountdownTimerActivityTest {
         getActivity().runOnUiThread(new Runnable() { @Override public void run() {
             assertEquals(STOPPED, getStateValue());
             assertEquals(0, getDisplayedValue());
-            for(int i= 0; i <5; i++){
+            for(int i= 0; i < 5; i++){
                 assertTrue(getButton().performClick());
             }
         }});
@@ -125,6 +119,9 @@ public abstract class AbstractCountdownTimerActivityTest {
         return tvToInt(ts);
     }
 
+    /**
+     * Gets state value, returns int.
+     */
     protected int getStateValue(){
         final TextView ts1 = (TextView) getActivity().findViewById(R.id.stateName);
         String stateValue = ts1.getText().toString();

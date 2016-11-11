@@ -9,6 +9,5 @@ import edu.luc.etl.cs313.android.countdowntimer.model.clock.ClockListener;
  */
 
 public interface TimerStateMachine extends TimerUIListener, ClockListener, TimerUIUpdateSource, TimerSMStateView {
-    void updateUIRuntime() // TODO
-    ;
+    void updateUIRuntime();
 }

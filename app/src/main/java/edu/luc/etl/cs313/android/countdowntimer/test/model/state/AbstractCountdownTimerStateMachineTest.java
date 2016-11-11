@@ -16,7 +16,7 @@ import edu.luc.etl.cs313.android.countdowntimer.model.state.TimerStateMachine;
 import edu.luc.etl.cs313.android.countdowntimer.model.time.TimeModel;
 
 /**
- * Testcase superclass for the stopwatch state machine model. Unit-tests the state
+ * Testcase superclass for the countdown timer state machine model. Unit-tests the state
  * machine in fast-forward mode by directly triggering successive tick events
  * without the presence of a pseudo-real-time clock. Uses a single unified mock
  * object for all dependencies of the state machine model.
@@ -69,22 +69,11 @@ public abstract class AbstractCountdownTimerStateMachineTest {
     }
 
     /**
-     * Verifies the following scenario: time is 0, press start, wait 5+ seconds,
-     * expect time 5.
-     */
-    @Test
-    public void testScenarioRun() {
-        assertTimeEquals(0);
-        // directly invoke the button press event handler methods
-        model.onStart();
-        onTickRepeat(5);
-        assertTimeEquals(0);
-    }
-
-    /**
-     * Verifies the following scenario: time is 0, press start, wait 5+ seconds,
-     * expect time 5, press lap, wait 4 seconds, expect time 5, press start,
-     * expect time 5, press lap, expect time 9, press lap, expect time 0.
+     * Verifies the following scenario: time is 0, press button, expected value 1,
+     * expected state STOPPED, press button 2 * max_time - means 2 * 99, expect RUNNING state,
+     * countdown 50 ticks, check if time equals max_time - 50, countdown 49 ticks, expect time 0,
+     * expect RINGING state, expect ringing, wait 3 ticks, expect RINGING, press button, expect not
+     * ringing, expect STOPPED state.
      *
      * @throws Throwable
      */
@@ -113,7 +102,7 @@ public abstract class AbstractCountdownTimerStateMachineTest {
     }
 
     private void onButtonRepeat(int t) {
-        for(int i =0; i< t; i++){
+        for(int i = 0; i < t; i++){
             model.onButtonPress();
         }
     }

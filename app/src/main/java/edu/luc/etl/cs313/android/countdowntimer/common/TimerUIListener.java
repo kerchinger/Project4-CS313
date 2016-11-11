@@ -1,7 +1,7 @@
 package edu.luc.etl.cs313.android.countdowntimer.common;
 
 /**
- * A listener for stopwatch events coming from the UI.
+ * A listener for countdown timer events coming from the UI.
  *
  * @author laufer
  */

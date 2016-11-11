@@ -22,6 +22,7 @@ import edu.luc.etl.cs313.android.countdowntimer.model.ConcreteTimerModelFacade;
 
 
 /**
+ *Timer Adapter mediates all interactions between the view and the model.
  *
  * Created by kyleerchinger on 11/1/16.
  */
@@ -104,6 +105,10 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
 
     MediaPlayer mediaPlayer = new MediaPlayer(); // put outside because we call the mediaplayer twice to start and stop, so we can't make a new media player everytime we call method
 
+    /**
+     * Rings continuous alarm.
+     */
+
     @Override
     public void ringAlarm(boolean b) {  // repeated ring that rings like an alarm
         runOnUiThread(() -> {
@@ -145,6 +150,9 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
         });
     }
 
+    /**
+     * Rings single notification.
+     */
     public void ringNotification(){  // this is a one-shot ring for when the restartTimout reaches 3 seconds it ring a notification
         runOnUiThread(() -> {
 
@@ -178,7 +186,10 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
      });
 
     }
-    // forward event listener methods to the model
+
+    /**
+     * Forward event listener methods to the model
+     */
     public void onButtonPress(final View view) {
         model.onButtonPress();
     }

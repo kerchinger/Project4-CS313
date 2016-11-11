@@ -9,6 +9,8 @@ import edu.luc.etl.cs313.android.countdowntimer.model.time.DefaultTimeModel;
 import edu.luc.etl.cs313.android.countdowntimer.model.time.TimeModel;
 
 /**
+ * Concrete class for timer model facade.
+ *
  * Created by kyleerchinger on 11/1/16.
  */
 

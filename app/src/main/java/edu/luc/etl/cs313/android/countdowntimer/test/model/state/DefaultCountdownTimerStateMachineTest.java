@@ -6,7 +6,7 @@ import org.junit.Before;
 import edu.luc.etl.cs313.android.countdowntimer.model.state.DefaultTimerStateMachine;
 
 /**
- * Concrete testcase subclass for the default stopwatch state machine
+ * Concrete testcase subclass for the default countdown timer state machine
  * implementation.
  *
  * @author laufer

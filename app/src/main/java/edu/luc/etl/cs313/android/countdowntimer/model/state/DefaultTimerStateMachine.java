@@ -6,6 +6,8 @@ import edu.luc.etl.cs313.android.countdowntimer.model.time.TimeModel;
 import edu.luc.etl.cs313.android.countdowntimer.common.TimerUIUpdateListener;
 
 /**
+ * Receive events from UI and timers. Defines states.
+ *
  * Created by kyleerchinger on 11/1/16.
  */
 
